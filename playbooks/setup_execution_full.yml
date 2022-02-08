@@ -1,0 +1,23 @@
+---
+# setups up the firewall rules for the machine
+#- import_playbook: tasks/start_firewall.yml
+
+# setups up the machine with docker, updates apt cache, adds user keys
+#- import_playbook: tasks/setup_machine.yml
+
+# creates requisite directories for data and sets permissions
+- import_playbook: tasks/mkdatadirs.yml
+
+# uploads custom chain config and genesis data if needed
+- import_playbook: tasks/upload_custom_config_data.yml
+
+# inits geth instance
+- import_playbook: tasks/init_geth_node.yml
+  when: eth1_client_name == 'geth'
+
+# starts execution container
+- import_playbook: tasks/start_execution_node.yml
+
+# install node_exporter and metric pusher
+# - import_playbook: tasks/setup_node_exporter_and_prometheus.yml
+#   when: push_metrics_enabled
