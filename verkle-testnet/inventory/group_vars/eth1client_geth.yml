@@ -21,6 +21,7 @@ eth1_start_args: >
   --http.port {{eth1_rpc_port}}
   --http.addr 0.0.0.0
   --http.corsdomain "*"
+  --http.vhosts=*
   --ws --ws.api "net,eth"
   --ws.port={{eth1_ws_rpc_port}}
   --ws.addr 0.0.0.0
