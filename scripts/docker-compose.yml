@@ -1,0 +1,34 @@
+version: "3.4"
+services:
+  postgres:
+    image: postgres:12.0
+    container_name: postgres
+    volumes:
+      - ./postgres_volumes:/src
+    command: >
+      -i -h 172.1.1.100
+    networks:
+        explorer_net:
+            ipv4_address: 172.1.1.100
+  blockscout:
+    image: skylenet/blockscout:v4.0.0-beta
+    container_name: blockscout
+    depends_on:
+      - postgres
+    volumes:
+      - ./explorer:/data
+      - ./genesis:/genesis
+    command: >
+      "echo $DATABASE_URL && mix do ecto.create, ecto.migrate && exec mix phx.server"
+    ports:
+      - "4000:4000"
+    networks:
+        explorer_net:
+            ipv4_address: 172.1.1.101
+
+
+networks:
+  explorer_net:
+    ipam:
+      config:
+        - subnet: 172.1.1.1/24

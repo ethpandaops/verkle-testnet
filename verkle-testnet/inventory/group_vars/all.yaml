@@ -24,12 +24,12 @@ eth1endpoint: http://127.0.0.1:8545
 # testnet specific information
 ##############################################
 testnet_type: custom
-eth2_network_name: verkle-testnet
+eth2_network_name: condrieu-testnet
 chainID: 69420
 
 # enter bootnodes here if needed
 eth1_bootnode_enode:
-  - "enode://900c14b5bf3ed791f040b28c62e5e03838392078d30f93ee9b8d0c953012ae72900c9970fbfe62261daa7f14603fcf8d9c6cc4437e39dc46fa08193ca0903cfe@206.189.52.190:30303"
+  - "enode://31e611f498eecb1c9fe74643a73cf353397a91f64d1dbdbb2b95dc9bd255679ff345bd2ecf3c24d5a42489a239ce81bcfa2b2d55e5530543cc3b1c0f24d0c0ce@206.189.52.190:30303"
 
 ##############################################
 # ports to configure
