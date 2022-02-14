@@ -19,7 +19,7 @@ services:
       - ./explorer:/data
       - ./genesis:/genesis
     command: >
-      "echo $DATABASE_URL && mix do ecto.create, ecto.migrate && exec mix phx.server"
+      sh -c "echo $DATABASE_URL && mix do ecto.create, ecto.migrate && exec mix phx.server"
     ports:
       - "4000:4000"
     networks:
