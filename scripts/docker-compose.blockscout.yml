@@ -1,15 +1,5 @@
 version: "3.4"
 services:
-  postgres:
-    image: postgres:12.0
-    container_name: postgres
-    volumes:
-      - ./postgres_volumes:/src
-    command: >
-      -i -h 172.1.1.100
-    networks:
-        explorer_net:
-            ipv4_address: 172.1.1.100
   blockscout:
     image: skylenet/blockscout:v4.0.0-beta
     container_name: blockscout
