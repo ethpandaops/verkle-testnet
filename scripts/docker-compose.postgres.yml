@@ -7,6 +7,8 @@ services:
       - ./postgres_volumes:/src
     command: >
       -i -h 172.1.1.100
+    ports:
+      - "5432:5432"
     networks:
         explorer_net:
             ipv4_address: 172.1.1.100
