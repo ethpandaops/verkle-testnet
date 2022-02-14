@@ -3,8 +3,6 @@ services:
   blockscout:
     image: skylenet/blockscout:v4.0.0-beta
     container_name: blockscout
-    depends_on:
-      - postgres
     volumes:
       - ./explorer:/data
       - ./genesis:/genesis
