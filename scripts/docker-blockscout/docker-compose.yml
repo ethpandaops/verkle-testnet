@@ -1,0 +1,43 @@
+version: "3.4"
+services:
+  blockscout:
+    image: skylenet/blockscout:v4.0.0-beta-lessbranding
+    command:
+      - /bin/sh
+      - -ace
+      - >
+        mix do ecto.create, ecto.migrate;
+        exec mix phx.server;
+    depends_on:
+      - "postgres"
+    ports:
+      - "4000:4000"
+    tty: true
+    environment:
+      ETHEREUM_JSONRPC_HTTP_URL: https://rpc.verkle.ethdevops.io
+      ETHEREUM_JSONRPC_WS_URL: ""
+      ETHEREUM_JSONRPC_VARIANT: geth
+      NETWORK: Ethereum
+      SUBNETWORK: Verkle
+      MIX_ENV: prod
+      COIN: ETH
+      LOGO: /images/ethereum_logo.svg
+      LOGO_FOOTER: /images/ethereum_logo.svg
+      DISABLE_EXCHANGE_RATES: "true"
+      DISABLE_KNOWN_TOKENS: "true"
+      SHOW_PRICE_CHART: "false"
+      ENABLE_1559_SUPPORT: "true"
+      DISABLE_READ_API: "true"
+      DISABLE_WRITE_API: "true"
+      ENABLE_TXS_STATS: "true"
+      SHOW_TXS_CHART: "true"
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/explorer?ssl=false
+  postgres:
+    image: postgres:11.15
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data
