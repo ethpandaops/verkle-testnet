@@ -43,7 +43,7 @@
   become: yes
   tasks:
     - template:
-        src: cerbot-renew/certs-renew.sh.j2
+        src: tasks/templates/cerbot-renew/certs-renew.sh.j2
         dest: /etc/haproxy/certs-renew.sh
         mode: 0755
     - name: Enable cronjob to auto-renew certs

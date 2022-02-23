@@ -1,0 +1,79 @@
+- name: add grafana user
+  user:
+    name: "{{ grafana_user }}"
+
+- name: "ensure etc_grafana directory exists."
+  file:
+    path: "{{ dir_etc_grafana }}"
+    owner: "{{ grafana_user }}"
+    mode: 0777
+    state: directory
+
+- name: "adjust var_lib_grafana permissions"
+  file:
+    path: "{{ dir_var_lib_grafana }}"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_user }}"
+    mode: 0777
+    state: directory
+
+- name: "adjust etc_grafana permissions"
+  file:
+    path: "{{ dir_etc_grafana }}"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_user }}"
+    mode: 0777
+    state: directory
+
+- name: get grafana uid
+  getent:
+    database: passwd
+    key: "{{ grafana_user }}"
+  register: grafana_uid
+
+- name: pull grafana image
+  docker_image:
+    name: "{{ grafana_image }}"
+    source: pull
+    force_source: yes
+    state: present
+
+- name: start grafana container
+  docker_container:
+    name: "{{ grafana_name }}"
+    image: "{{ grafana_image }}"
+    memory: '{{ grafana_memory_limit | default(omit) }}'
+    state: started
+    env: "{{ grafana_env }}"
+    recreate: "{{ grafana_recreate_container}}"
+    restart_policy: always
+    stop_timeout: "{{ grafana_stop_timeout }}"
+    networks: "{{ grafana_docker_networks }}"
+    networks_cli_compatible: "{{ (grafana_docker_networks | length > 0)  | ternary('yes', 'no') }}"
+    container_default_behavior: no_defaults
+    volumes:
+      - "{{ dir_var_lib_grafana }}:/var/lib/grafana"
+      - "{{ dir_etc_grafana }}/dashboards:/etc/grafana/dashboards"
+    ports:
+      - "3000:3000"
+
+- name: copy grafana dashboards
+  copy:
+    src: "{{ item }}"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_user }}"
+    mode: 0777
+    dest: "{{ dir_etc_grafana }}/dashboards/"
+  with_fileglob:
+    - dashboards/*
+
+- name: import grafana dashboards
+  grafana_dashboard:
+    grafana_url: http://localhost:3000
+    grafana_user: "{{ grafana_env['GF_SECURITY_ADMIN_USER'] }}"
+    grafana_password: "{{ grafana_env['GF_SECURITY_ADMIN_PASSWORD'] }}"
+    state: present
+    overwrite: yes
+    path: "{{ dir_etc_grafana }}/dashboards/{{ item | basename }}"
+  with_fileglob:
+    - dashboards/*

@@ -1,0 +1,29 @@
+# name that will be used by the docker container
+grafana_name: grafana
+
+# grafana docker image
+grafana_image: grafana/grafana
+
+# force recreation of the grafana container
+grafana_recreate_container: false
+
+# number of seconds to wait for the container to stop before sending SIGKILL
+grafana_stop_timeout: "60"
+
+# user that will run the grafana container
+grafana_user: grafana
+
+# memory limit for the grafana container
+grafana_memory_limit: null
+
+# data directory that is used for persiting grafana data on the local server
+dir_var_lib_grafana: /data/var_lib_grafana
+dir_etc_grafana: /data/etc_grafana
+
+# docker networks, if left empty it will just run in the "bridge" network
+grafana_docker_networks: []
+
+# environment variables (KEY: value)
+grafana_env:
+  GF_SECURITY_ADMIN_USER: admin
+  GF_SECURITY_ADMIN_PASSWORD: admin

@@ -1,0 +1,10 @@
+#### alertmanager config ####
+
+# directory to store configs as well as log artefacts
+alertmanager_dir: /home/devops/alertmanager
+
+# alertmanager container image to use
+alertmanager_image: prom/alertmanager:v0.23.0
+
+# api key for pagerduty
+pagerduty_alertmanager_api_key: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/raw-iron/verkle-monitoring-pagerduty') }}"

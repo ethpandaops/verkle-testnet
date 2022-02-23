@@ -1,5 +1,5 @@
 - name: Start node exporter and prometheus
-  hosts: beacon, validator
+  hosts: prometheus
   gather_facts: true
   roles:
     - cloudalchemy.node-exporter

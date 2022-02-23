@@ -11,4 +11,3 @@ landing_page_volumes:
   - "{{landing_page_dir}}/custom_text.md:/app/layouts/partials/custom.md"
 
 landing_page_port: 1313
-landing_page_ip: 172.1.1.108

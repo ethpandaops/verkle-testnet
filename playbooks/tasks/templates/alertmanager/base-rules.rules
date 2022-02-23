@@ -1,0 +1,83 @@
+# Only 2 severities
+# warning: create a ticket but can be solved during business hours
+# critical: has to be dealt with immediately
+
+groups:
+- name: Prometheus
+  rules:
+  - alert: PrometheusTargetMissing
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: Prometheus target missing (instance {{ $labels.instance }}) (eth2client {{ $labels.eth2client }})
+- name: Network
+  rules:
+  - alert: HostUnusualNetworkThroughputIn
+    expr: sum by (instance) (rate(node_network_receive_bytes_total[2m])) / 1024 / 1024 > 100
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host unusual network throughput in (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
+  - alert: HostUnusualNetworkThroughputOut
+    expr: sum by (instance) (rate(node_network_transmit_bytes_total[2m])) / 1024 / 1024 > 100
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host unusual network throughput out (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
+- name: RAM
+  rules:
+  - alert: HostOutOfRAM
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host out of RAM (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
+- name: Disk
+  rules:
+  # Please add ignored mountpoints in node_exporter parameters like
+  # "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)".
+  # Same rule using "node_filesystem_free_bytes" will fire when disk fills for non-root users.
+  - alert: HostOutOfDiskSpace
+    expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host almost out (<10% free) of disk space (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
+  - alert: HostOutOfDiskSpace
+    expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 5 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+    for: 10m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host almost out (<5% free) of disk space (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
+  - alert: HostDiskWillFillIn24Hours
+    expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) predict_linear(node_filesystem_avail_bytes{fstype!~"tmpfs"}[1h], 24 * 3600) < 0 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host disk will fill in 24 hours (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
+- name: CPU
+  rules:
+  - alert: HostHighCpuLoad
+    expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[10m])) * 100) > 98
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host high CPU load (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
+- name: Other
+  rules:
+  - alert: ContainerKilled
+    expr: time() - container_last_seen > 60
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Container killed (instance {{ $labels.instance }})(eth2client {{ $labels.eth2client }})
