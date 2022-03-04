@@ -33,7 +33,7 @@ haproxy_backend_servers:
     address: 127.0.0.1:8000
     options: 'check fall 3 rise 2'
   - name: host_condrieu_explorer
-    address: localhost:3334
+    address: localhost:4567
     options: 'check fall 3 rise 2'
 
 haproxy_stats_port: 8404
