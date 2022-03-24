@@ -11,3 +11,6 @@ enode for execution clients:
 ```sh
 https://github.com/parithosh/verkle-testnet/blob/main/verkle-testnet/custom_config_data/genesis.json
 ```
+
+You can optimise the `geth init` time by using our precompiled data found [here](https://condrieu.fra1.digitaloceanspaces.com/precomp). 
+Just place it in the same location as the `genesis.json` file of geth and perform all the steps normally. 

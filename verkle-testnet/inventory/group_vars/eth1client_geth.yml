@@ -30,6 +30,7 @@ eth1_start_args: >
   --vmodule=rpc=5
   --metrics --pprof --pprof.addr 0.0.0.0
   --syncmode=full
+  --ethstats={{inventory_hostname}}:condrieu@ethstats.condrieu.ethdevops.io
   {% if (eth1_bootnode_enode is defined) and eth1_bootnode_enode %}
   --bootnodes="{{ eth1_bootnode_enode | join(',') }}"
   {% endif %}

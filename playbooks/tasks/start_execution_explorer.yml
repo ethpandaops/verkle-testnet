@@ -15,9 +15,13 @@
           - name: "{{explorer_docker_network_name}}"
             ipv4_address: "172.1.1.102"
         ports:
-          - "3334:4000"
+          - "4567:4567"
         restart: "{{ explorer_require_restart | default(false) }}"
-        memory: "{{explorer_memory}}"
         command: "{{ execution_explorer_start_args }}"
         volumes: "{{execution_explorer_volumes}}"
-        env_file: "{{explorer_host_dir}}/blockscout.env"
+    - name: Enable cronjob to export explorer data
+      cron:
+        name: "explorer"
+        minute: "*"
+        job: "docker exec explorer bundle exec ./crawler.rb"
+        user: "devops"

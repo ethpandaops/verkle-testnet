@@ -1,6 +1,6 @@
 ---
 # stop any running beacon/validator docker image
-# - import_playbook: tasks/stop_execution_node.yml
+- import_playbook: tasks/stop_execution_node.yml
 
 # starts execution node docker container
-# - import_playbook: tasks/start_execution_node.yml
+- import_playbook: tasks/start_execution_node.yml

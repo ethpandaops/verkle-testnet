@@ -7,6 +7,8 @@ certificates:
     mode: http
   explorer.condrieu.ethdevops.io:
     mode: http
+  ethstats.condrieu.ethdevops.io:
+    mode: http
 
 haproxy_frontends:
   - name: host_condrieu_rpc
@@ -21,6 +23,9 @@ haproxy_frontends:
   - name: host_condrieu_explorer
     address: explorer.condrieu.ethdevops.io
     backend: host_condrieu_explorer
+  - name: host_condrieu_ethstats
+    address: ethstats.condrieu.ethdevops.io
+    backend: host_condrieu_ethstats
 
 haproxy_backend_servers:
   - name: host_condrieu_rpc
@@ -34,6 +39,9 @@ haproxy_backend_servers:
     options: 'check fall 3 rise 2'
   - name: host_condrieu_explorer
     address: localhost:4567
+    options: 'check fall 3 rise 2'
+  - name: host_condrieu_ethstats
+    address: 127.0.0.1:3000
     options: 'check fall 3 rise 2'
 
 haproxy_stats_port: 8404
