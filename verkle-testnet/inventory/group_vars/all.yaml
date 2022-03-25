@@ -29,7 +29,7 @@ chainID: 69420
 
 # enter bootnodes here if needed
 eth1_bootnode_enode:
-  - "enode://a102a56f111127edd6de133ad426e7ff4bc3fc39559fd94f76afe11c6124e11a4e17e2f62aefa79dc0da3f23cdabcacbabc8d2d2d8a0709edf07445b82c5e968@206.189.52.190:30303"
+  - "enode://e08f6c94083e11dd86fc9e0263ef9a3c457fdb7b1fa0b95be09f96876b82ae55bc0758145ebe141a53882922fd12018a7ae6f930d02512b7b5e4922bd49a972a@206.189.52.190:30303"
 
 # prometheus config
 prometheus_config_file: "prometheus/prometheus.yml.j2"

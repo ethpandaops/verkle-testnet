@@ -17,13 +17,29 @@ params:
   defaultTheme: dark
   ethereum:
     ethstatsUrl: https://ethstats.condrieu.ethdevops.io
-    explorerUrl: https://explorer.condrieu.ethdevops.io
     faucetUrl: https://faucet.condrieu.ethdevops.io
     rpcUrl: https://rpc.condrieu.ethdevops.io
-    beaconexplorerUrl:
-    consensusmonitorUrl:
+    explorerUrl: https://explorer.condrieu.ethdevops.io
     chainName: "{{eth2_network_name}}"
     chainId: "{{chainID}}"
+
+  links:
+  - name: "Beaconchain explorer"
+    dataLookup: beaconexplorerUrl
+  - name: "Transaction explorer"
+    dataLookup: explorerUrl
+  - name: "Ethstats"
+    dataLookup: ethstatsUrl
+  - name: "Consensus monitor"
+    dataLookup: consensusmonitorUrl
+  - name: "Faucet"
+    dataLookup: faucetUrl
+  - name: "JSON RPC"
+    dataLookup: rpcUrl
+
+  # additionalLinks:
+  # - name: "Launchpad"
+  #   url: "https://kiln.launchpad.ethereum.org"
 
 menu:
   main:
@@ -35,3 +51,4 @@ menu:
 disableKinds: ["taxonomy", "taxonomyTerm"]
 
 copyright: "Long live the merge."
+

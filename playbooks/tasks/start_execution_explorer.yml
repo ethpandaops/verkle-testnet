@@ -3,6 +3,10 @@
   gather_facts: true
   serial: 20
   tasks:
+    - name: Creates testnet dir
+      file:
+        path: "{{explorer_host_dir}}"
+        state: directory
     - name: Start execution explorer
       docker_container:
         name: "{{ execution_explorer_container_name }}"

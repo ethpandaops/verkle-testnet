@@ -14,7 +14,6 @@
         ports:
           - "8000:8000"
         restart: "{{ explorer_require_restart | default(false) }}"
-        memory: "{{explorer_memory}}"
         volumes: "{{ faucet_volumes }}"
         env:
           HCAPTCHA_SITEKEY: "{{ hcaptcha_site_key }}"
