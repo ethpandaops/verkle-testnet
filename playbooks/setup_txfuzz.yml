@@ -10,6 +10,6 @@
         image: "{{ txfuzz_image_name }}"
         pull: true
         restart_policy: unless-stopped
-        network_mode: bridge
+        network_mode: host
         restart: "{{ explorer_require_restart | default(false) }}"
         command: "{{txfuzz_start_args}}"

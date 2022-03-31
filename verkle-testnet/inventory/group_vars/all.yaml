@@ -29,7 +29,7 @@ chainID: 69420
 
 # enter bootnodes here if needed
 eth1_bootnode_enode:
-  - "enode://e08f6c94083e11dd86fc9e0263ef9a3c457fdb7b1fa0b95be09f96876b82ae55bc0758145ebe141a53882922fd12018a7ae6f930d02512b7b5e4922bd49a972a@206.189.52.190:30303"
+  - "enode://ad61031249fdfab83161c1c1068461e96b2d6a639e919ef65f940d99581b9b7bbd5854d87088b2905489dc7c9567ab51d5085ad5f307baa3319571fb62eb2ff0@206.189.52.190:30303"
 
 # prometheus config
 prometheus_config_file: "prometheus/prometheus.yml.j2"
@@ -40,6 +40,14 @@ prometheus_config_file: "prometheus/prometheus.yml.j2"
 eth1_rpc_port: 8545
 eth1_ws_rpc_port: 8546
 node_exporter_web_listen_address: "0.0.0.0:9100"
+eth1_engine_snoop_port: 8560
+
+##############################################
+# Command for JSON RPC snooper
+##############################################
+snoop_command: "./json_rpc_snoop -p {{eth1_engine_snoop_port}} http://127.0.0.1:{{eth1_rpc_port}}"
+snoop_image_name: parithoshj/json_rpc_snoop:v1.0.0-x86
+snoop_container_name: snooper
 
 ##############################################
 # name of the validator to display

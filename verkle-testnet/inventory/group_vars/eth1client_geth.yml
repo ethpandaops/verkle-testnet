@@ -1,5 +1,5 @@
 eth1_client_name: geth
-eth1_image_name: parithoshj/geth:verkle-3068fe9
+eth1_image_name: parithoshj/geth:verkle-fc9c06d
 
 eth1_memory: 5000M
 eth1_kernel_memory: 5500M
