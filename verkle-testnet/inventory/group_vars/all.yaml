@@ -12,6 +12,7 @@ github_user_pubkeys:
   - skylenet
   - jwasinger
   - gballet
+  - shivamagl95
 
 ansible_python_interpreter: /usr/bin/python3
 oh_my_zsh_config:
@@ -29,7 +30,7 @@ chainID: 69420
 
 # enter bootnodes here if needed
 eth1_bootnode_enode:
-  - "enode://ad61031249fdfab83161c1c1068461e96b2d6a639e919ef65f940d99581b9b7bbd5854d87088b2905489dc7c9567ab51d5085ad5f307baa3319571fb62eb2ff0@206.189.52.190:30303"
+  - "enode://bc57276085419e3dd13ed4f4ba14d6fe513582d25e6b8fbf830f5e331d5911348c6df4f776685bb83eb6948f42697cf0941b6f58796872be426b9206ed15946e@206.189.52.190:30303"
 
 # prometheus config
 prometheus_config_file: "prometheus/prometheus.yml.j2"

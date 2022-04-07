@@ -14,7 +14,7 @@ hcaptcha_secret: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devo
 # faucet config
 ##############################################
 ether_to_transfer: 10000000000000000000
-rpc_url: https://rpc.condrieu.ethdevops.io
+faucet_rpc_url: https://rpc.condrieu.ethdevops.io
 faucet_private_key: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/verkle/verkle-faucet-key') }}"
 unit_name: "vETH"
 
