@@ -41,7 +41,7 @@ frontend stats
 
 
 frontend https
-    bind 80
+    bind :80
     bind :443 ssl crt /etc/certificates/
     mode http
     http-request redirect scheme https code 301 unless { ssl_fc }
