@@ -8,6 +8,10 @@
       shell: "docker stop --time=10 {{eth1_client_name}}"
       register: stop_result
       failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
+    - name: Stop snooper container
+      shell: "docker stop --time=10 {{snoop_container_name}}"
+      register: stop_result
+      failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
     - name: Remove execution data
       become: true
       file:

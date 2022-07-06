@@ -72,3 +72,18 @@ module "verkle-geth" {
   digital_ocean_project_name = local.digital_ocean_project_name
   #  vpc_uuid = digitalocean_vpc.vpc.id
 }
+
+module "shadowfork-verkle" {
+  droplet_count = 2
+
+  size =  "s-4vcpu-8gb-amd"
+  region = local.region
+  image = local.image
+  name = "shadowfork-sepolia-geth"
+  source = "../../modules/"
+
+  tags = concat(local.shared_project_tags,["execution","eth1client_geth_shadowfork","verkle-testnet"])
+  ssh_key_name = local.ssh_key_name
+  digital_ocean_project_name = local.digital_ocean_project_name
+  #  vpc_uuid = digitalocean_vpc.vpc.id
+}
