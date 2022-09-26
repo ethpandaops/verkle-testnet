@@ -38,4 +38,4 @@ el_start_args: >
 el_user_id: "1000:1000"
 
 # ./go-ethereum/build/bin/geth --datadir=./beverly-hills-testnet init genesis.json
-# ./go-ethereum/build/bin/geth --datadir=./beverly-hills-testnet --ethash.dagdir=./beverly-hills-testnet/ethash --mine --miner.threads=1 --miner.etherbase=0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134 --metrics --pprof --pprof.addr 0.0.0.0 --http --http.corsdomain='*' --http.addr="0.0.0.0" --http.api="net,eth,debug,txpool" --http.vhosts='*' --nat extip:206.189.52.190 --networkid=69420 console
+# ./go-ethereum/build/bin/geth --datadir=./beverly-hills-testnet --ethash.dagdir=./beverly-hills-testnet/ethash --mine --miner.threads=1 --miner.etherbase=0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134 --metrics --pprof --pprof.addr 0.0.0.0 --http --http.corsdomain='*' --http.addr="0.0.0.0" --http.api="net,eth,debug,txpool" --http.vhosts='*' --nat extip:206.189.52.190 --networkid=90210 console
