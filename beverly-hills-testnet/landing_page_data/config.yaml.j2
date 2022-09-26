@@ -1,0 +1,54 @@
+baseURL: https://beverlyhills.ethdevops.io
+languageCode: en-us
+title: {{ eth2_network_name }}
+theme: PaperMod
+
+markup:
+  highlight:
+    # anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    lineNos: false
+    # noClasses: false
+    style: monokai
+
+params:
+  disableThemeToggle: true
+  defaultTheme: dark
+  ethereum:
+    ethstatsUrl: https://ethstats.beverlyhills.ethdevops.io
+    faucetUrl: https://faucet.beverlyhills.ethdevops.io
+    rpcUrl: https://rpc.beverlyhills.ethdevops.io
+    explorerUrl: https://explorer.beverlyhills.ethdevops.io
+    chainName: "{{eth2_network_name}}"
+    chainId: "{{chainID}}"
+
+  links:
+  - name: "Beaconchain explorer"
+    dataLookup: beaconexplorerUrl
+  - name: "Transaction explorer"
+    dataLookup: explorerUrl
+  - name: "Ethstats"
+    dataLookup: ethstatsUrl
+  - name: "Consensus monitor"
+    dataLookup: consensusmonitorUrl
+  - name: "Faucet"
+    dataLookup: faucetUrl
+  - name: "JSON RPC"
+    dataLookup: rpcUrl
+
+  # additionalLinks:
+  # - name: "Launchpad"
+  #   url: "https://kiln.launchpad.ethereum.org"
+
+menu:
+  main:
+    - identifier: ethereum-website
+      name: ethereum.org
+      url: https://ethereum.org
+      weight: 30
+
+disableKinds: ["taxonomy", "taxonomyTerm"]
+
+copyright: "Long live the verge."
+

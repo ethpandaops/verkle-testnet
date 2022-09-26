@@ -3,14 +3,14 @@
   gather_facts: false
   serial: 20
   tasks:
-- name: Init eth1 data dirs for nodes
-  hosts: eth1
+- name: Init el data dirs for nodes
+  hosts: el
   gather_facts: false
   serial: 20
   tasks:
-    - name: Creates eth1 dir
+    - name: Creates el dir
       file:
-        path: "{{eth1_node_dir}}"
+        path: "{{el_node_dir}}"
         state: directory
 - name: Init testnet data dirs for nodes
   hosts: [beacon, execution, validator]

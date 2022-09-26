@@ -1,0 +1,15 @@
+explorer_docker_network_name: explorernet
+
+execution_explorer_container_name: explorer
+
+execution_explorer_image_name: "parithoshj/verkle-explorer:v0.0.8"
+
+
+explorer_host_dir: "{{home_dir}}/verkle-block-explorer"
+
+execution_explorer_volumes:
+  - "{{explorer_host_dir}}/db:/verkle-explorer/db"
+
+execution_explorer_start_args: "bundle exec ./app.rb -o 0.0.0.0"
+
+execution_explorer_cronjob: "docker exec explorer bundle exec ./crawler.rb"

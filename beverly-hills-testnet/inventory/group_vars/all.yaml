@@ -1,0 +1,117 @@
+##############################################
+# generic ansible config information
+##############################################
+ansible_user: "devops"
+bootstrap_user: "devops"
+initial_remote_user: "root"
+
+github_user_pubkeys:
+  - parithosh
+  - protolambda
+  - ralexstokes
+  - djrtwo
+  - skylenet
+  - jwasinger
+  - gballet
+  - shivamagl95
+  - barnabasbusa
+  - samcm
+
+ansible_python_interpreter: /usr/bin/python3
+oh_my_zsh_config:
+  PROMPT: "%{$fg[yellow]%}%n%{$fg[white]%}@%{$fg[red]%}%m%{$reset_color%} ${PROMPT}"
+
+
+elendpoint: http://127.0.0.1:8545
+
+##############################################
+# testnet specific information
+##############################################
+testnet_type: custom
+eth2_network_name: beverly-hills-testnet
+chainID: 90210
+
+# enter bootnodes here if needed
+el_bootnode_enode:
+  - "enode://bc57276085419e3dd13ed4f4ba14d6fe513582d25e6b8fbf830f5e331d5911348c6df4f776685bb83eb6948f42697cf0941b6f58796872be426b9206ed15946e@206.189.52.190:30303"
+
+##############################################
+# metric information
+##############################################
+# enter pushgateway config if needed
+prometheus_config_file: "prometheus/prometheus.yml.j2"
+push_url: "https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write"
+push_metrics_enabled: true
+remote_write_auth: true
+eth_metrics_exporter_enabled: true
+eth_metrics_exporter_name: "metrics-exporter"
+eth_metrics_exporter_image: "samcm/ethereum-metrics-exporter:0.17.0"
+remote_write_username: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .username') }}"
+remote_write_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .password') }}"
+
+no_validator_keys: false
+ethstats_url: "ethstats.beverlyhills.ethdevops.io"
+ethstats_password: "beverlyhills"
+
+##############################################
+# ports to configure
+##############################################
+el_rpc_port: 8545
+el_ws_rpc_port: 8546
+node_exporter_web_listen_address: "0.0.0.0:9100"
+el_engine_snoop_port: 8560
+
+##############################################
+# Command for JSON RPC snooper
+##############################################
+snoop_command: "./json_rpc_snoop -p {{el_engine_snoop_port}} http://127.0.0.1:{{el_rpc_port}}"
+snoop_image_name: parithoshj/json_rpc_snoop:v1.0.0-x86
+snoop_container_name: snooper
+
+
+##############################################
+# local data directories
+##############################################
+local_explorerdata_host_dir: "{{inventory_dir}}/../explorerdata"
+local_explorerdata_host_archive: "{{inventory_dir}}/../explorerdata.tar.gz"
+local_forkmondata_host_dir: "{{inventory_dir}}/../forkmondata"
+local_forkmondata_host_archive: "{{inventory_dir}}/../forkmondata.tar.gz"
+local_custom_config_data_host_dir: "{{inventory_dir}}/../custom_config_data"
+local_custom_config_data_host_archive: "{{inventory_dir}}/../custom_config_data.tar.gz"
+
+
+##############################################
+# remote host data directories
+##############################################
+home_dir: "/home/{{ ansible_user }}"
+testnet_dir: "{{home_dir}}/custom_config_data"
+el_node_dir: "{{home_dir}}/eldata"
+
+##############################################
+# common log config
+##############################################
+common_log_options:
+  max-file: "10"
+  max-size: 30m
+  mode: non-blocking
+  max-buffer-size: 4m
+common_log_driver: json-file
+
+
+##############################################
+# container names
+##############################################
+hi_peer_count: 25
+
+firewall_allowed_tcp_ports:
+  - 22
+  - 30303
+  - 80
+  - 443
+
+firewall_allowed_udp_ports:
+  - 30303
+
+firewall_additional_rules:
+  - "iptables -A INPUT -p tcp --dport 4000 -s 206.189.52.190 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 206.189.52.190 -j ACCEPT"

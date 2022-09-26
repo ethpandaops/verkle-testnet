@@ -13,7 +13,7 @@
 
 # inits geth instance
 - import_playbook: tasks/init_geth_node.yml
-  when: eth1_client_name == 'geth'
+  when: el_client_name == 'geth'
 
 # starts execution container
 - import_playbook: tasks/start_execution_node.yml
