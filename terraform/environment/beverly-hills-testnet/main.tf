@@ -25,7 +25,7 @@ locals {
   digital_ocean_project_name = "Verkle Testnets"
   size = "s-4vcpu-8gb-amd"
   region = "fra1"
-  image = "ubuntu-20-04-x64"
+  image = "ubuntu-22-04-x64"
   name = "beverlyHills"
   vpc_name="beverlyHills"
   vpc_ip_range="10.169.77.0/24"
@@ -46,7 +46,7 @@ resource "digitalocean_vpc" "vpc" {
 module "verkle_bootnode" {
   droplet_count = 1
 
-  size =  "s-4vcpu-8gb-amd"
+  size =  "s-8vcpu-16gb-amd"
   region = local.region
   image = local.image
   name = "verkle-bootnode"

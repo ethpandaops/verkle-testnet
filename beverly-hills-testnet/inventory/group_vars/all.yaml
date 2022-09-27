@@ -3,11 +3,10 @@
 ##############################################
 ansible_user: "devops"
 bootstrap_user: "devops"
-initial_remote_user: "root"
+initial_remote_user: "devops"
 
 github_user_pubkeys:
   - parithosh
-  - protolambda
   - ralexstokes
   - djrtwo
   - skylenet
@@ -33,7 +32,7 @@ chainID: 90210
 
 # enter bootnodes here if needed
 el_bootnode_enode:
-  - "enode://bc57276085419e3dd13ed4f4ba14d6fe513582d25e6b8fbf830f5e331d5911348c6df4f776685bb83eb6948f42697cf0941b6f58796872be426b9206ed15946e@206.189.52.190:30303"
+  - "enode://538fae5d3be0f4182ffb1d05b1c8f7271c7dc4baca1cd676d5540f098e2375fd70ce3c748a7cf2803aa5848b11e83947e0d7672140a08d976a811d6afc49a825@134.122.74.110:30303"
 
 ##############################################
 # metric information
@@ -99,10 +98,13 @@ common_log_driver: json-file
 
 
 ##############################################
-# container names
+# peer count
 ##############################################
 hi_peer_count: 25
 
+##############################################
+# firewall rules
+##############################################
 firewall_allowed_tcp_ports:
   - 22
   - 30303
@@ -113,5 +115,4 @@ firewall_allowed_udp_ports:
   - 30303
 
 firewall_additional_rules:
-  - "iptables -A INPUT -p tcp --dport 4000 -s 206.189.52.190 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 8545 -s 206.189.52.190 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 134.122.74.110 -j ACCEPT"

@@ -1,5 +1,5 @@
 el_client_name: geth
-el_image_name: parithoshj/geth:verkle-trie-proof-in-block-rebased-b9adceb
+el_image_name: parithoshj/geth:verkle-trie-post-merge-66ec0dc
 
 el_memory: 5000M
 el_kernel_memory: 5500M
@@ -34,7 +34,9 @@ el_start_args: >
   {% if (el_bootnode_enode is defined) and el_bootnode_enode %}
   --bootnodes="{{ el_bootnode_enode | join(',') }}"
   {% endif %}
-
+  {% if ansible_hostname == "verkle-bootnode-1" %}
+  --ethash.dagdir=./networkdata/ethash --mine --miner.threads=1 --miner.etherbase=0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134
+  {% endif %}
 el_user_id: "1000:1000"
 
 # ./go-ethereum/build/bin/geth --datadir=./beverly-hills-testnet init genesis.json

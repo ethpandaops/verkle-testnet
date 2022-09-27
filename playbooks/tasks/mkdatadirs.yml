@@ -4,7 +4,7 @@
   serial: 20
   tasks:
 - name: Init el data dirs for nodes
-  hosts: el
+  hosts: execution
   gather_facts: false
   serial: 20
   tasks:

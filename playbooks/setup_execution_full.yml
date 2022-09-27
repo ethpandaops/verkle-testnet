@@ -22,5 +22,5 @@
 - import_playbook: tasks/start_snooper.yml
 
 # install node_exporter and metric pusher
-# - import_playbook: tasks/setup_node_exporter_and_prometheus.yml
-#   when: push_metrics_enabled
+- import_playbook: tasks/setup_node_exporter_and_prometheus.yml
+  when: push_metrics_enabled

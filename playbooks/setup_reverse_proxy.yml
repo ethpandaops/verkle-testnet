@@ -25,7 +25,7 @@
       loop: "{{ cert_stat.results }}"
       when: not item.stat.exists
 #      command: certbot certonly -n --agree-tos --email parithosh@ethereum.org --staple-ocsp --standalone -d {{ item.item.key }},*.{{ item.item.key }}
-      command: certbot certonly --standalone -d {{ item.item.key }} --staple-ocsp -m parithosh@ethereum.org --agree-tos
+      command: certbot certonly --standalone -d {{ item.item.key }} --staple-ocsp -m devops+certbot@ethereum.org --agree-tos
 
     - name: prepare haproxy certs
       loop: "{{ cert_stat.results }}"
