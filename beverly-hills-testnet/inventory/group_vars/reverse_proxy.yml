@@ -38,7 +38,7 @@ haproxy_backend_servers:
     address: 127.0.0.1:8000
     options: 'check fall 3 rise 2'
   - name: host_beverlyhills_explorer
-    address: localhost:4567
+    address: 127.0.0.1:4567
     options: 'check fall 3 rise 2'
   - name: host_beverlyhills_ethstats
     address: 127.0.0.1:3000

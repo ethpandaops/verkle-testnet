@@ -7,6 +7,22 @@
       file:
         path: "{{explorer_host_dir}}"
         state: directory
+    - name: Move the explorer config j2 template to remote
+      template:
+        src: vekle-explorer/config.yml.j2
+        dest:  "{{explorer_host_dir}}/config.yml"
+        mode: '755'
+    - name: init execution explorer
+      docker_container:
+        name: "{{ execution_explorer_container_name }}"
+        state: started
+        image: "{{ execution_explorer_image_name }}"
+        pull: true
+        restart_policy: unless-stopped
+        network_mode: bridge
+        restart: "{{ explorer_require_restart | default(false) }}"
+        command: "{{ execution_explorer_init_args }}"
+        volumes: "{{execution_explorer_volumes}}"
     - name: Start execution explorer
       docker_container:
         name: "{{ execution_explorer_container_name }}"

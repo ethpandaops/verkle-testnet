@@ -17,7 +17,7 @@ geth_init_args: >
 el_start_args: >
   --datadir=/eldata
   --networkid={{chainID}}
-  --http --http.api "net,eth"
+  --http --http.api "net,eth,debug"
   --http.port {{el_rpc_port}}
   --http.addr 0.0.0.0
   --http.corsdomain "*"

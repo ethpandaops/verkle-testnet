@@ -3,7 +3,7 @@
     "chainId": 90210,
     "homesteadBlock": 0,
     "daoForkBlock": 0,
-    "daoForkSupport": true,
+    "daoForkSupport": false,
     "eip150Block": 0,
     "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
     "eip155Block": 0,
