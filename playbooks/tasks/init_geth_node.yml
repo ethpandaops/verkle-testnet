@@ -1,5 +1,5 @@
 - name: Init geth node
-  hosts: eth1client_geth
+  hosts: geth
   gather_facts: true
   serial: 20
   tasks:
@@ -7,7 +7,7 @@
       docker_container:
         name: "geth_tmp"
         state: started
-        image: "{{ eth1_image_name }}"
+        image: "{{ el_image_name }}"
         pull: true
         restart_policy: no
         auto_remove: false
@@ -15,14 +15,14 @@
         network_mode: host
         log_options: "{{ common_log_options }}"
         log_driver: "{{ common_log_driver }}"
-        volumes: "{{eth1_volumes}}"
+        volumes: "{{el_volumes}}"
         command: "{{ geth_init_args }}"
-        env: "{{ eth1_env | default({}) }}"
+        env: "{{ el_env | default({}) }}"
 #     - name: Run geth db cleanup
 #       docker_container:
 #        name: "geth_cleanup_db"
 #        state: started
-#        image: "{{ eth1_image_name }}"
+#        image: "{{ el_image_name }}"
 #        pull: true
 #        restart_policy: no
 #        auto_remove: false
@@ -30,6 +30,6 @@
 #        network_mode: host
 #        log_options: "{{ common_log_options }}"
 #        log_driver: "{{ common_log_driver }}"
-#        volumes: "{{eth1_volumes}}"
+#        volumes: "{{el_volumes}}"
 #        command: "{{ geth_cleanup_args }}"
-#        env: "{{ eth1_env | default({}) }}"
+#        env: "{{ el_env | default({}) }}"

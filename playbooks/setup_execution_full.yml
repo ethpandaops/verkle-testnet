@@ -13,7 +13,7 @@
 
 # inits geth instance
 - import_playbook: tasks/init_geth_node.yml
-  when: eth1_client_name == 'geth'
+  when: el_client_name == 'geth'
 
 # starts execution container
 - import_playbook: tasks/start_execution_node.yml
@@ -22,5 +22,5 @@
 - import_playbook: tasks/start_snooper.yml
 
 # install node_exporter and metric pusher
-# - import_playbook: tasks/setup_node_exporter_and_prometheus.yml
-#   when: push_metrics_enabled
+- import_playbook: tasks/setup_node_exporter_and_prometheus.yml
+  when: push_metrics_enabled

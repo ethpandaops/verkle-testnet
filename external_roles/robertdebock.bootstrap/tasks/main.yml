@@ -58,9 +58,9 @@
       ansible.builtin.setup:
 
     - name: install bootstrap packages
+      become: yes
       ansible.builtin.package:
         name: "{{ item }}"
         state: present
       loop: "{{ bootstrap_facts_packages.split() }}"
   become: yes
-  become_user: "{{ bootstrap_ansible_user | default(bootstrap_user) }}"

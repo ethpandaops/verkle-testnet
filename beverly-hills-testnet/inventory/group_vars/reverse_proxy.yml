@@ -1,0 +1,57 @@
+certificates:
+  rpc.beverlyhills.ethdevops.io:
+    mode: http
+  beverlyhills.ethdevops.io:
+    mode: http
+  faucet.beverlyhills.ethdevops.io:
+    mode: http
+  explorer.beverlyhills.ethdevops.io:
+    mode: http
+  ethstats.beverlyhills.ethdevops.io:
+    mode: http
+
+haproxy_frontends:
+  - name: host_beverlyhills_rpc
+    address: rpc.beverlyhills.ethdevops.io
+    backend: host_beverlyhills_rpc
+  - name: host_beverlyhills
+    address: beverlyhills.ethdevops.io
+    backend: host_beverlyhills
+  - name: host_beverlyhills_faucet
+    address: faucet.beverlyhills.ethdevops.io
+    backend: host_beverlyhills_faucet
+  - name: host_beverlyhills_explorer
+    address: explorer.beverlyhills.ethdevops.io
+    backend: host_beverlyhills_explorer
+  - name: host_beverlyhills_ethstats
+    address: ethstats.beverlyhills.ethdevops.io
+    backend: host_beverlyhills_ethstats
+
+haproxy_backend_servers:
+  - name: host_beverlyhills_rpc
+    address: localhost:8545
+    options: 'check fall 3 rise 2'
+  - name: host_beverlyhills
+    address: 127.0.0.1:1313
+    options: 'check fall 3 rise 2'
+  - name: host_beverlyhills_faucet
+    address: 127.0.0.1:8000
+    options: 'check fall 3 rise 2'
+  - name: host_beverlyhills_explorer
+    address: 127.0.0.1:4567
+    options: 'check fall 3 rise 2'
+  - name: host_beverlyhills_ethstats
+    address: 127.0.0.1:3000
+    options: 'check fall 3 rise 2'
+
+haproxy_stats_port: 8404
+haproxy_user: devops
+haproxy_group: devops
+haproxy_stats_user: devops
+haproxy_stats_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/verkle/verkle-haproxy-key') }}"
+
+haproxy_default_backend_name: host_beverlyhills
+grafana_prometheus_network_name: explorernet
+
+le_email: parithosh@ethereum.org
+debian_certbot: false

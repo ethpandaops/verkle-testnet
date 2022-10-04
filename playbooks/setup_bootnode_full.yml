@@ -1,3 +1,0 @@
----
-- import_playbook: tasks/setup_machine.yml
-- import_playbook: tasks/start_bootnode.yml
