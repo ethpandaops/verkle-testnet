@@ -1,6 +1,6 @@
 el_client_name: geth
-el_image_name: parithoshj/geth:beverly-hills-head-a09d5bc
-execution_endpoint: http://127.0.0.1:{{el_engine_port}}
+el_image_name: parithoshj/geth:beverly-hills-head-f0e4ab0
+execution_endpoint: http://127.0.0.1:{{el_engine_snoop_port}}
 
 el_memory: 5000M
 el_kernel_memory: 5500M
@@ -33,7 +33,7 @@ el_start_args: >
   --authrpc.jwtsecret=/jwtsecret
   --nat extip:{{ansible_host}}
   --allow-insecure-unlock
-  --vmodule=rpc=5
+  --vmodule=catalyst=5
   --metrics --pprof --pprof.addr 0.0.0.0
   --syncmode=full
   --ethstats={{inventory_hostname}}:{{ethstats_password}}@{{ethstats_url}}

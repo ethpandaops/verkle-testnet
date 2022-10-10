@@ -38,11 +38,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-Ly4QNkvhEuiveP3o3577Bw1SyUbcsB9rGVhLkQIBB3SB8ymdlVFGhOjWnEatCnbzoxw78nkpZfxnH1hfuJwUgGQitMBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAd7taEAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQKSVNOFdsk9O8JRcNTGE1eXO-msOWYz_YlVAZ5XBIMCHIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+  - "enr:-Ly4QAWB5GRMZ_uDhjNINw_ZOqjfvielbJ60bo4bWruApjdxR4VmawkcIpVVTm6VJTlb9OgZJobziAoPbD9WbCqTLKABh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAd7taEAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQMEEj_LQMt5u3d4CJk0ea4LoCfxsvxuUonuiHORsxAatohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
-  - "enode://e4ec3704fd6696536cdd4dd85e05343ce4b9ef8aaa9f18d63cd001aae433b239b6c71a943dccf8a10b93fc402087d410003606c5e3bdeda7440b629dc70d7b8d@134.122.74.110:30303"
-
+  - "enode://354178386d7a86c4def9dd608a91864e7bcb7334ebc0525ee0ab79cd01085089a4c296b942eaaefa2663b1db876a4e3894e598ea6af7518965ac38cbf347eae4@134.122.74.110:30303"
 
 ##############################################
 # metric information
@@ -81,7 +80,7 @@ eth_metrics_exporter_port: 8003
 ##############################################
 # Command for JSON RPC snooper
 ##############################################
-snoop_command: "./json_rpc_snoop -p {{el_engine_snoop_port}} http://127.0.0.1:{{el_rpc_port}}"
+snoop_command: "./json_rpc_snoop -p {{el_engine_snoop_port}} http://127.0.0.1:{{el_engine_port}}"
 snoop_image_name: parithoshj/json_rpc_snoop:v1.0.0-x86
 snoop_container_name: snooper
 

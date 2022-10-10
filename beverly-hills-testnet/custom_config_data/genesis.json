@@ -17,11 +17,11 @@
     "londonBlock": 0,
     "cancunBlock": 0,
     "mergeNetsplitBlock": 0,
-    "terminalTotalDifficulty": 0,
+    "terminalTotalDifficulty": 1,
     "ethash": {}
   },
   "nonce": "0x56",
-  "timestamp": "1664892900",
+  "timestamp": "1665415200",
   "extraData": "0x",
   "gasLimit": "0x2fefd8",
   "difficulty": "0x1",
