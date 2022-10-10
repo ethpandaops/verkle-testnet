@@ -17,7 +17,7 @@
     "londonBlock": 0,
     "cancunBlock": 0,
     "mergeNetsplitBlock": 0,
-    "terminalTotalDifficulty": 1,
+    "terminalTotalDifficulty": 0,
     "ethash": {}
   },
   "nonce": "0x56",
