@@ -38,10 +38,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-Ly4QFWla8VMIOI_Cxse3ztliIiz3vo-Y2S5-m-wFcmhTTy8LgIAfJ9ZBL1E45zRjMPNKezZSKy2qZR42yU0uFqBPQkBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQIw1_LJrbdhi10cOhzz8PlNn8vf321MJsSyo6a5vf9_BIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+  - "enr:-Ly4QCJY1_M6WyW1feaZR70Lish9WGLrDjwnGhdV5zCPzFsRUZRSc_BxMV1wmdtFsDYO6Sn6XRjZPhAk_J_ynpBZGdkBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQK9OcR8CdobyPbAUbjKgY-f2Y5vTw1qEbcg0sNRixUEGYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
-  - "enode://67513370a8877e88b172786034fd666291adc2a356eecd644acd47f5e5f2cbf78a7aa36229757d4600b90f4bd3279b9f399bc8dabd375a9545cb51933a69ae0c@134.122.74.110:30303"
+  - "enode://5cc465fd83be5b2eac138ef5d10de43a85b2a42f282d3a02e9bb741e272ae9b0f82610cb1972ad0cf3a4b3b1664e34bd8ee740062239a4bd607459b9c99b710b@134.122.74.110:30303"
 
 ##############################################
 # metric information
@@ -52,6 +52,7 @@ push_url: "https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write
 push_metrics_enabled: true
 remote_write_auth: true
 eth_metrics_exporter_enabled: true
+cl_validator_metrics_enabled: false
 eth_metrics_exporter_name: "metrics-exporter"
 eth_metrics_exporter_image: "samcm/ethereum-metrics-exporter:0.17.0"
 remote_write_username: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .username') }}"
@@ -75,6 +76,7 @@ beacon_metrics_port: 8000
 beacon_p2p_port: 9000
 validator_metrics_port: 8001
 validator_rpc_port: 4002
+el_metrics_port: 8002
 eth_metrics_exporter_port: 8003
 
 ##############################################

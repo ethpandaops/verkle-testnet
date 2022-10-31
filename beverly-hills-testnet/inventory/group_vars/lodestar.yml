@@ -41,7 +41,15 @@ beacon_start_args: >
         --dataDir=/beacondata
         --paramsFile=/custom_config_data/config.yaml
         --genesisStateFile=/custom_config_data/genesis.ssz
-        --bootnodes="enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
+        --port={{ beacon_p2p_port }}
+        --enr.ip={{ ansible_host }}
+        --enr.tcp={{ beacon_p2p_port }}
+        --enr.udp={{ beacon_p2p_port }}
+          {% if (bootnode_enrs is defined) and bootnode_enrs %}
+          {% for bootnode_enr in bootnode_enrs %}
+          --bootnodes="{{ bootnode_enr }}"
+          {% endfor %}
+          {% endif %}
         --network.connectToDiscv5Bootnodes
         --rest.port={{beacon_api_port}}
         --execution.urls={{execution_endpoint}}
@@ -49,7 +57,6 @@ beacon_start_args: >
         --rest.address=0.0.0.0
         --rest.cors="*"
         --logLevel={{ beacon_log_level | lower }}
-        --enr.ip={{ansible_host}}
         --metrics
         --metrics.port={{ beacon_metrics_port }}
         --eth1.depositContractDeployBlock=0

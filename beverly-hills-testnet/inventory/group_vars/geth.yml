@@ -34,7 +34,7 @@ el_start_args: >
   --nat extip:{{ansible_host}}
   --allow-insecure-unlock
   --vmodule=catalyst=5
-  --metrics --pprof --pprof.addr 0.0.0.0
+  --metrics --pprof --pprof.addr 0.0.0.0 --pprof.port={{el_metrics_port}}
   --syncmode=full
   --ethstats={{inventory_hostname}}:{{ethstats_password}}@{{ethstats_url}}
   {% if (el_bootnode_enode is defined) and el_bootnode_enode %}
