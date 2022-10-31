@@ -38,10 +38,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-Ly4QAXZeFFlB9pjUaoCHycJy8BaZ88kQ-v5VEbhlIT1uDCtQCk3iDKaK6kVGYl3UE4m68hPV78Ohqpjgul43e_5NoABh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQIGa474meji3CKuDWkp0KywJxXddaZA1CWSTrpNS7_6NIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+  - "enr:-Ly4QFWla8VMIOI_Cxse3ztliIiz3vo-Y2S5-m-wFcmhTTy8LgIAfJ9ZBL1E45zRjMPNKezZSKy2qZR42yU0uFqBPQkBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQIw1_LJrbdhi10cOhzz8PlNn8vf321MJsSyo6a5vf9_BIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
-  - "enode://95e77cfecc803ace2a09ef6dc63eaa242e563a16b70e56e2fcaa248510c6be739f1d33b9b58162bb9ea633fe09e3f7140a94b98756d83963ddd664a437832c97@134.122.74.110:30303"
+  - "enode://67513370a8877e88b172786034fd666291adc2a356eecd644acd47f5e5f2cbf78a7aa36229757d4600b90f4bd3279b9f399bc8dabd375a9545cb51933a69ae0c@134.122.74.110:30303"
 
 ##############################################
 # metric information
@@ -144,10 +144,13 @@ firewall_allowed_tcp_ports:
   - 80
   - 443
   - 9000
+  - 4000
 
 firewall_allowed_udp_ports:
   - 30303
   - 9000
+  - 80
+  - 443
 
 firewall_additional_rules:
   - "iptables -A INPUT -p tcp --dport 8545 -s 134.122.74.110 -j ACCEPT"

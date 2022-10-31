@@ -12,7 +12,7 @@
         restart_policy: unless-stopped
         network_mode: bridge
         ports:
-          - "8000:8000"
+          - "{{ faucet_port }}:8000"
         restart: "{{ explorer_require_restart | default(false) }}"
         volumes: "{{ faucet_volumes }}"
         env:

@@ -9,6 +9,7 @@ execution_explorer_image_name: "parithoshj/verkle-explorer:v0.0.9"
 
 explorer_first_block: 0
 explorer_ip_address: "134.122.74.110"
+el_rpc_url: "https://rpc.beverlyhills.ethdevops.io"
 el_deposit_contract_first_block: 0
 
 execution_rpc_url: http://rpc.beverlyhills.ethdevops.io:8545
@@ -37,7 +38,7 @@ explorer_postgres_memory: 9000m
 explorer_postgres_user: postgres
 explorer_postgres_ip: 172.1.1.100
 explorer_postgres_port: 5432
-beacon_explorer_config_cont_path: "/data/eth2_config.yaml"
+beacon_explorer_config_cont_path: "/data/cl_config.yaml"
 explorer_postgres_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/merge-devnets/merge-devnet-3/explorer-postgres') }}"
 
 explorer_postgres_host_dir: "{{home_dir}}/explorer_postgres_data"

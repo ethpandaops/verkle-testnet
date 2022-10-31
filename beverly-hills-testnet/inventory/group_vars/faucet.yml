@@ -3,6 +3,7 @@
 ##############################################
 faucet_node_dir: "{{home_dir}}/faucet_data"
 debug: false
+faucet_header: "{{eth2_network_name}} FaucETH"
 
 ##############################################
 # captcha info
@@ -23,5 +24,6 @@ unit_name: "bETH"
 ##############################################
 faucet_container_name: faucet
 faucet_image_name: skylenet/fauceth:fix_fee_estimation
+faucet_port: 8010
 faucet_volumes:
   - "{{faucet_node_dir}}:/config"
