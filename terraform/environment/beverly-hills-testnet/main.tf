@@ -52,22 +52,52 @@ module "verkle_bootnode" {
   name = "verkle-bootnode"
   source = "../../modules/"
 
-  tags = concat(local.shared_project_tags,["execution","geth","explorer","bootnode","faucet", "landing_page","reverse_proxy","beverly-hills-testnet"])
+  tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","explorer","bootnode","faucet", "ethstats_server","landing_page","reverse_proxy","beverly-hills-testnet"])
   ssh_key_name = local.ssh_key_name
   digital_ocean_project_name = local.digital_ocean_project_name
 #  vpc_uuid = digitalocean_vpc.vpc.id
 }
 
-module "verkle-geth" {
+module "verkle-lighthouse-geth" {
   droplet_count = 2
 
   size =  "s-2vcpu-4gb-amd"
   region = local.region
   image = local.image
-  name = "verkle-geth"
+  name = "verkle-lighthouse-geth"
   source = "../../modules/"
 
-  tags = concat(local.shared_project_tags,["execution","geth","beverly-hills-testnet"])
+  tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","beverly-hills-testnet"])
+  ssh_key_name = local.ssh_key_name
+  digital_ocean_project_name = local.digital_ocean_project_name
+  #  vpc_uuid = digitalocean_vpc.vpc.id
+}
+
+module "verkle-teku-geth" {
+  droplet_count = 1
+
+  size =  "s-2vcpu-4gb-amd"
+  region = local.region
+  image = local.image
+  name = "verkle-teku-geth"
+  source = "../../modules/"
+
+  tags = concat(local.shared_project_tags,["beacon","validator","teku","execution","geth","beverly-hills-testnet"])
+  ssh_key_name = local.ssh_key_name
+  digital_ocean_project_name = local.digital_ocean_project_name
+  #  vpc_uuid = digitalocean_vpc.vpc.id
+}
+
+module "verkle-lodestar-geth" {
+  droplet_count = 1
+
+  size =  "s-2vcpu-4gb-amd"
+  region = local.region
+  image = local.image
+  name = "verkle-lodestar-geth"
+  source = "../../modules/"
+
+  tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet"])
   ssh_key_name = local.ssh_key_name
   digital_ocean_project_name = local.digital_ocean_project_name
   #  vpc_uuid = digitalocean_vpc.vpc.id

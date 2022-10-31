@@ -1,15 +1,15 @@
 # Extends the mainnet preset
 # This *could* be 'minimal', but it's not recommended to use because not every client supports 'minimal'
 PRESET_BASE: 'mainnet'
-CONFIG_NAME: testnet # needs to exist because of Prysm. Otherwise it conflicts with mainnet genesis
+CONFIG_NAME: 'beverlyhills' # needs to exist because of Prysm. Otherwise it conflicts with mainnet genesis
 
 # Genesis
 # ---------------------------------------------------------------
 # `2**14` (= 16,384)
 MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 190
-MIN_GENESIS_TIME: 1666705500
+MIN_GENESIS_TIME: 1667214000
 GENESIS_FORK_VERSION: 0x00090210
-GENESIS_DELAY: 300
+GENESIS_DELAY: 120
 
 # Forking
 # ---------------------------------------------------------------
@@ -29,6 +29,9 @@ TERMINAL_TOTAL_DIFFICULTY: 0
 TERMINAL_BLOCK_HASH: 0x0000000000000000000000000000000000000000000000000000000000000000
 # NOTE: This is commented out because Nimbus warns us that it's an unrecognized parameter
 TERMINAL_BLOCK_HASH_ACTIVATION_EPOCH: 18446744073709551615
+# Capella
+CAPELLA_FORK_VERSION: 0x00090213
+CAPELLA_FORK_EPOCH: 18446744073709551615
 # Sharding
 SHARDING_FORK_VERSION: 0x00090213
 SHARDING_FORK_EPOCH: 18446744073709551615
@@ -43,7 +46,7 @@ MIN_VALIDATOR_WITHDRAWABILITY_DELAY: 256
 SHARD_COMMITTEE_PERIOD: 256
 # It's very important that SECONDS_PER_ETH1_BLOCK * ETH1_FOLLOW_DISTANCE is a good amount of time, else
 #  jitter will cause the Beacon nodes to think they're far behind the Eth1 nodes and give up syncing
-SECONDS_PER_ETH1_BLOCK: 10
+SECONDS_PER_ETH1_BLOCK: 12
 ETH1_FOLLOW_DISTANCE: 30
 
 

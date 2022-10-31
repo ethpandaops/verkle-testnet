@@ -3,7 +3,7 @@
 ##############################################
 ansible_user: "devops"
 bootstrap_user: "devops"
-initial_remote_user: "devops"
+initial_remote_user: "root"
 
 github_user_pubkeys:
   - parithosh
@@ -38,10 +38,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-Ly4QHJaXMHPAX_nGVh5wodmdawXGg5bU8_4OEOBm7R0lWnNItIPoUOyvRZVLVet-r45-q8ZqlVJlp2RnyfgRsK7X4MBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAd7taEAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQI8Hax56IROqmjWGVGxTU2op429pYZwje1hXfZdoWxlCIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+  - "enr:-Ly4QAXZeFFlB9pjUaoCHycJy8BaZ88kQ-v5VEbhlIT1uDCtQCk3iDKaK6kVGYl3UE4m68hPV78Ohqpjgul43e_5NoABh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQIGa474meji3CKuDWkp0KywJxXddaZA1CWSTrpNS7_6NIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
-  - "enode://ac24c0e910b2a1fc7e90905ff64c78b204576f05ac6d8674511bee6b8394a3e8c6429227b71d4484de40de017737dab80c9ff61d457c3bfa56173789c36ea5ff@134.122.74.110:30303"
+  - "enode://95e77cfecc803ace2a09ef6dc63eaa242e563a16b70e56e2fcaa248510c6be739f1d33b9b58162bb9ea633fe09e3f7140a94b98756d83963ddd664a437832c97@134.122.74.110:30303"
 
 ##############################################
 # metric information
@@ -99,6 +99,7 @@ local_forkmondata_host_archive: "{{inventory_dir}}/../forkmondata.tar.gz"
 local_custom_config_data_host_dir: "{{inventory_dir}}/../custom_config_data"
 local_custom_config_data_host_archive: "{{inventory_dir}}/../custom_config_data.tar.gz"
 local_cl_config_filepath: "{{local_custom_config_data_host_dir}}/config.yaml"
+local_mnemonics_filepath: "{{local_custom_config_data_host_dir}}/mnemonics.yaml"
 # private dirs
 # Validator assignments
 local_validator_host_dir: "{{inventory_dir}}/../validator_prep/{{ansible_hostname}}"
@@ -142,7 +143,6 @@ firewall_allowed_tcp_ports:
   - 30303
   - 80
   - 443
-  - 8545
   - 9000
 
 firewall_allowed_udp_ports:

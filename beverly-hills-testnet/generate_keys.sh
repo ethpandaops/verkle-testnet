@@ -33,6 +33,10 @@ function prep_group {
 
 prep_group 1 "$VALIDATORS_MNEMONIC_0" 0 1 "verkle-bootnode" 64
 
-prep_group 1 "$VALIDATORS_MNEMONIC_0" 1 2 "verkle-geth" 64
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 1 2 "verkle-lighthouse-geth" 64
+
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 3 1 "verkle-teku-geth" 64
+
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 4 1 "verkle-lodestar-geth" 64
 
 
