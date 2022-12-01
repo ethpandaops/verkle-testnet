@@ -1,5 +1,5 @@
 el_client_name: geth
-el_image_name: parithoshj/geth:beverly-hills-head-f0e4ab0
+el_image_name: parithoshj/geth:beverly-hills-head-0f327e5
 execution_endpoint: http://127.0.0.1:{{el_engine_snoop_port}}
 
 el_memory: 5000M
