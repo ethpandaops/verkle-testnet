@@ -9,6 +9,10 @@ certificates:
     mode: http
   ethstats.beverlyhills.ethdevops.io:
     mode: http
+  beaconchain.beverlyhills.ethdevops.io:
+    mode: http
+  forkmon.beverlyhills.ethdevops.io:
+    mode: http
 
 haproxy_frontends:
   - name: host_beverlyhills_rpc
@@ -26,22 +30,34 @@ haproxy_frontends:
   - name: host_beverlyhills_ethstats
     address: ethstats.beverlyhills.ethdevops.io
     backend: host_beverlyhills_ethstats
+  - name: host_beverlyhills_beaconchain
+    address: beaconchain.beverlyhills.ethdevops.io
+    backend: host_beverlyhills_beaconchain
+  - name: host_beverlyhills_forkmon
+    address: forkmon.beverlyhills.ethdevops.io
+    backend: host_beverlyhills_forkmon
 
 haproxy_backend_servers:
   - name: host_beverlyhills_rpc
-    address: localhost:8545
+    address: 127.0.0.1:8545
     options: 'check fall 3 rise 2'
   - name: host_beverlyhills
     address: 127.0.0.1:1313
     options: 'check fall 3 rise 2'
   - name: host_beverlyhills_faucet
-    address: 127.0.0.1:8000
+    address: 127.0.0.1:8010
     options: 'check fall 3 rise 2'
   - name: host_beverlyhills_explorer
     address: 127.0.0.1:4567
     options: 'check fall 3 rise 2'
   - name: host_beverlyhills_ethstats
     address: 127.0.0.1:3000
+    options: 'check fall 3 rise 2'
+  - name: host_beverlyhills_beaconchain
+    address: 127.0.0.1:3333
+    options: 'check fall 3 rise 2'
+  - name: host_beverlyhills_forkmon
+    address: 127.0.0.1:8080
     options: 'check fall 3 rise 2'
 
 haproxy_stats_port: 8404

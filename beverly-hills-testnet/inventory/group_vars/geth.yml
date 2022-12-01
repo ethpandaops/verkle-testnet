@@ -1,5 +1,6 @@
 el_client_name: geth
-el_image_name: parithoshj/geth:verkle-trie-post-merge-66ec0dc
+el_image_name: parithoshj/geth:beverly-hills-head-0f327e5
+execution_endpoint: http://127.0.0.1:{{el_engine_snoop_port}}
 
 el_memory: 5000M
 el_kernel_memory: 5500M
@@ -10,6 +11,7 @@ elendpoint_ws: ws://127.0.0.1:8546
 el_volumes:
   - "{{el_node_dir}}:/eldata"
   - "{{testnet_dir}}:/networkdata"
+  - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 geth_init_args: >
   --datadir=/eldata init /networkdata/genesis.json
@@ -17,7 +19,7 @@ geth_init_args: >
 el_start_args: >
   --datadir=/eldata
   --networkid={{chainID}}
-  --http --http.api "net,eth,debug,web3"
+  --http --http.api "net,eth,debug,engine,web3"
   --http.port {{el_rpc_port}}
   --http.addr 0.0.0.0
   --http.corsdomain "*"
@@ -25,18 +27,20 @@ el_start_args: >
   --ws --ws.api "net,eth"
   --ws.port={{el_ws_rpc_port}}
   --ws.addr 0.0.0.0
+  --authrpc.port={{el_engine_port}}
+  --authrpc.addr=0.0.0.0
+  --authrpc.vhosts="*"
+  --authrpc.jwtsecret=/jwtsecret
   --nat extip:{{ansible_host}}
   --allow-insecure-unlock
-  --vmodule=rpc=5
-  --metrics --pprof --pprof.addr 0.0.0.0
+  --vmodule=catalyst=5
+  --metrics --pprof --pprof.addr 0.0.0.0 --pprof.port={{el_metrics_port}}
   --syncmode=full
   --ethstats={{inventory_hostname}}:{{ethstats_password}}@{{ethstats_url}}
   {% if (el_bootnode_enode is defined) and el_bootnode_enode %}
   --bootnodes="{{ el_bootnode_enode | join(',') }}"
   {% endif %}
-  {% if ansible_hostname == "verkle-bootnode-1" %}
-  --ethash.dagdir=./networkdata/ethash --mine --miner.threads=1 --miner.etherbase=0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134
-  {% endif %}
+
 el_user_id: "1000:1000"
 
 # ./go-ethereum/build/bin/geth --datadir=./beverly-hills-testnet init genesis.json

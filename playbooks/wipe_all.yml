@@ -4,12 +4,26 @@
   gather_facts: true
   become: true
   tasks:
-    - name: Stop execution client container
-      shell: "docker stop --time=10 {{el_client_name}}"
+    - name: Stop cl beacon node container
+      shell: "docker rm -f {{beacon_container_name}}"
       register: stop_result
       failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
-    - name: Stop snooper container
-      shell: "docker stop --time=10 {{snoop_container_name}}"
+    - name: Remove beacon data
+      become: true
+      file:
+        path: "{{beacon_node_dir}}"
+        state: absent
+    - name: Stop cl validator client container
+      shell: "docker rm -f {{validator_container_name}}"
+      register: stop_result
+      failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
+    - name: Remove validator data
+      become: true
+      file:
+        path: "{{validator_node_dir}}"
+        state: absent
+    - name: Stop execution client container
+      shell: "docker rm -f {{el_client_name}}"
       register: stop_result
       failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
     - name: Remove execution data
@@ -20,10 +34,23 @@
     - name: Remove testnet dir
       become: true
       when: (testnet_type == 'custom') or
-            (testnet_type == 'prater' and eth2_client_name == 'prysm')
+        (testnet_type == 'prater' and cl_client_name == 'prysm')
       file:
         path: "{{testnet_dir}}"
         state: absent
+    - name: Remove jwt secret
+      become: true
+      file:
+        path: "{{ home_dir }}/jwtsecret"
+        state: absent
+    - name: Stop RPC snooper container
+      shell: "docker rm -f {{snoop_container_name}}"
+      register: stop_result
+      failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
+    - name: Stop metrics container
+      shell: "docker rm -f {{eth_metrics_exporter_name}}"
+      register: stop_result
+      failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
 #     - name: Stop node_exporter service
 #       systemd:
 #         state: stopped
