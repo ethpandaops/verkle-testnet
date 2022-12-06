@@ -16,20 +16,14 @@ params:
   disableThemeToggle: true
   defaultTheme: dark
   ethereum:
-    beaconexplorerUrl: https://beaconchain.beverlyhills.ethdevops.io
     ethstatsUrl: https://ethstats.beverlyhills.ethdevops.io
     faucetUrl: https://faucet.beverlyhills.ethdevops.io
     rpcUrl: https://rpc.beverlyhills.ethdevops.io
-    explorerUrl: https://explorer.beverlyhills.ethdevops.io
     forkmonUrl: https://forkmon.beverlyhills.ethdevops.io
     chainName: "{{eth2_network_name}}"
     chainId: "{{chainID}}"
 
   links:
-  - name: "Beaconchain explorer"
-    dataLookup: beaconexplorerUrl
-  - name: "Transaction explorer"
-    dataLookup: explorerUrl
   - name: "Ethstats"
     dataLookup: ethstatsUrl
   - name: "forkmon"

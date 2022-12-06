@@ -38,10 +38,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-Ly4QPu0iJbvoUBgPtPlBgwayXwcFhEmLwZB__clZyJ-niQGGdM7FDWpve01WawH8di857MywrY3ExoCuZmq4DeDOUABh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQLly7qpKJHk--KpvYHHx7fpX0-QCWKT6MlCLntGQVHNH4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+  - "enr:-Ly4QNrXxYuvhaMfxR5f0G99UlEefdr0AFSNm4JWH6GSpBj_DDE2rvEcbeDE4MYKAHk2SPQrGPDkSlV08WF9ElqcedwBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQI4FlgIggpCSCQLsuV38Y2nUcgxUen8sHieXs-0SIcTTohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
-  - "enode://dba4a85b29fa75ceb939327eaf2a55d93c4fdf0782c6e55d1294f3bdb9ada343aad5624f80621ae721d54a937e67718584a87be381586f9917204224fd66a6fd@134.122.74.110:30303"
+  - "enode://98ee60c1c972aa92fa75fac9dfbb1120951a7d7819774263b32c9b3361f44345e88545e8940b7fed054a49aaa9514791855f06fcf4be50033af3d72705bb22e3@134.122.74.110:30303"
 
 ##############################################
 # metric information
