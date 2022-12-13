@@ -56,7 +56,6 @@ beacon_start_args: >
   --suggested-fee-recipient={{fee_recipient}}
   --jwt-secrets="/jwtsecret"
   --count-unrealized
-
 # in case of eth1 deposit endpoint problems: --dummy-eth1
 
 validator_start_args: >

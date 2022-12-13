@@ -1,6 +1,4 @@
 certificates:
-  rpc.beverlyhills.ethdevops.io:
-    mode: http
   beverlyhills.ethdevops.io:
     mode: http
   faucet.beverlyhills.ethdevops.io:
@@ -15,9 +13,6 @@ certificates:
     mode: http
 
 haproxy_frontends:
-  - name: host_beverlyhills_rpc
-    address: rpc.beverlyhills.ethdevops.io
-    backend: host_beverlyhills_rpc
   - name: host_beverlyhills
     address: beverlyhills.ethdevops.io
     backend: host_beverlyhills
@@ -38,9 +33,6 @@ haproxy_frontends:
     backend: host_beverlyhills_forkmon
 
 haproxy_backend_servers:
-  - name: host_beverlyhills_rpc
-    address: 127.0.0.1:8545
-    options: 'check fall 3 rise 2'
   - name: host_beverlyhills
     address: 127.0.0.1:1313
     options: 'check fall 3 rise 2'

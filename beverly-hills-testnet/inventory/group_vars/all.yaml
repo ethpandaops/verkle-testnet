@@ -38,12 +38,11 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-L24QN119RejcIBOCkvOK8p4a6FrIi2lkGjP24wqES5QZ4qCUWtuJDBN3jmDlvFWm5PEvoeLZpQCEQTAYWglJMtOKWCBxYdhdHRuZXRziP__________hGV0aDKQCGSdJgAJAhL__________4JpZIJ2NIJpcIShIxU1iXNlY3AyNTZrMaEC-vhD-_XdBU7Rzo5S_HlImpVa49qrpfgHmnQwDKpa1lWIc3luY25ldHMPg3RjcIIjKIN1ZHCCIyg"
-  - "enr:-L24QMO9xPKeUWBJVCi3RPNkx6oe7pB6ZSLdQc1Gsust3I-vdSWKFZXPz004MzrsfSuzeUS3UB_P9mn3EjcyLqYjmReBxYdhdHRuZXRziP__________hGV0aDKQCGSdJgAJAhL__________4JpZIJ2NIJpcIShIxnZiXNlY3AyNTZrMaEDwb8NsjHtudzTUrMxwr9d_uEp_FtN2p03arnJkv7aAz-Ic3luY25ldHMPg3RjcIIjKIN1ZHCCIyg"
+  - "enr:-Ly4QEWTv6D1Sb0hem1VGZoSha7wbzHiHqmFPervWT0mY9_ISJd-tJzP0u-vgOFc65UaWJv5pUnHxGQT54hre9EImasBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAIZJ0mAAkCEv__________gmlkgnY0gmlwhIZ6Sm6Jc2VjcDI1NmsxoQJ0rTle2zesfAkwNp4jUZUftIBArJ6CDU_vCVXxS0x6b4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+
 el_bootnode_enode:
-  - "enode://53e292cebf02b4868b3a2a2aa40b4ff34de0d2048d19e7faa14c718f8d46bc61370856ae995a08c583d89c256c14c4dc045c30affc32eded8dfb99ca794beaa6@161.35.25.217:30303"
-  - "enode://8762beb06f769526d0459b4e4eee6c909c3b944ee370cc7cae95df5c23d81441cfb7cf80a31fba1f9da0e81f6428f1a63658ffeadd001d33eace9993bba0e7b1@161.35.25.188:30303"
-  - "enode://6b7be1a1fd36cccca38e58fd621248726bb6b17f622fbbdd93c92bba3fa9b29e1ead9f76556a2e2fef5171d1cf954e00aab9bcac5bffbb6def7e136e57c62556@161.35.21.53:30303"
+  - "enode://233ed4bb0212b90c161f06a546415a50206fc5b18ec7797a9331aa907c6ab3964d9a1b1a3fccd31596a1b775daad0fd038dc0dee963cf2b1fe3b875746261618@134.122.74.110:30303"
+
 ##############################################
 # metric information
 ##############################################
@@ -147,7 +146,6 @@ firewall_allowed_tcp_ports:
   - 80
   - 443
   - 9000
-  - 4000
 
 firewall_allowed_udp_ports:
   - 30303
