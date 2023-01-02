@@ -2,7 +2,7 @@ explorer_docker_network_name: explorernet
 
 execution_explorer_container_name: explorer
 
-execution_explorer_image_name: "parithoshj/verkle-explorer:v0.0.9"
+execution_explorer_image_name: "parithoshj/verkle-explorer:v0.0.10"
 
 execution_rpc_url: http://rpc.condrieu.ethdevops.io:8545
 
