@@ -17,7 +17,7 @@ hcaptcha_secret: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devo
 ether_to_transfer: 10000000000000000000
 faucet_rpc_url: https://rpc.kaustinen.ethdevops.io
 faucet_private_key: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/verkle/verkle-faucet-key') }}"
-unit_name: "bETH"
+unit_name: "kETH"
 
 ##############################################
 # faucet container info
