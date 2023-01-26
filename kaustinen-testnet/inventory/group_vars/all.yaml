@@ -37,8 +37,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 
 # enter bootnodes here if needed
 bootnode_enrs:
+  - "enr:-Ly4QJeoz6UeL2JL2h54iUU0IU2XFi8TnRFHZAIrzGCOuOS_ZG5d6w0w-hMJF00nzsT6i5Pu1v2qHMKDudQUZhvpzp0Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAqejCCAAaUIv__________gmlkgnY0gmlwhLI-49qJc2VjcDI1NmsxoQMKd2_x7QQbLg4VT0hWjPO_xrH8C0U1lTCqCE0lsO9fzohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
+  - "enode://3da5fa6fb683a747a7258f93880ec5a28128e0c9a6272d9b0fa5aa27d182a6088b0d53f5fed214d5922d75220a6f31b56232273d48ded990db69e027fae8acfd@178.62.227.218:30303"
 
 ##############################################
 # metric information
@@ -151,5 +153,5 @@ firewall_allowed_udp_ports:
   - 443
 
 firewall_additional_rules:
-  - "iptables -A INPUT -p tcp --dport 8545 -s 164.92.164.242 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 4000 -s 164.92.164.242 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 178.62.227.218 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 4000 -s 178.62.227.218 -j ACCEPT"

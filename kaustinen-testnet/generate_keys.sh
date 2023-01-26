@@ -31,7 +31,7 @@ function prep_group {
   done
 }
 
-prep_group 1 "$VALIDATORS_MNEMONIC_0" 1 20 "kaustinen-lighthouse-geth" 64
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 1 20 "kaustinen-testnet-lighthouse-geth" 64
 
 
 
