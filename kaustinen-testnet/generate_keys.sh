@@ -31,9 +31,7 @@ function prep_group {
   done
 }
 
-prep_group 1 "$VALIDATORS_MNEMONIC_0" 0 1 "kaustinen-bootnode" 64
-
-prep_group 1 "$VALIDATORS_MNEMONIC_0" 1 2 "kaustinen-lighthouse-geth" 64
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 1 20 "kaustinen-lighthouse-geth" 64
 
 
 
