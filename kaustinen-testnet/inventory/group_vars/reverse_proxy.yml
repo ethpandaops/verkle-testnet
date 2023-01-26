@@ -1,40 +1,40 @@
 certificates:
-  kaustinen.ethpandaops.io:
+  kaustinen.ethdevops.io:
     mode: http
-  faucet.kaustinen.ethpandaops.io:
+  faucet.kaustinen.ethdevops.io:
     mode: http
-  explorer.kaustinen.ethpandaops.io:
+  explorer.kaustinen.ethdevops.io:
     mode: http
-  ethstats.kaustinen.ethpandaops.io:
+  ethstats.kaustinen.ethdevops.io:
     mode: http
-  beaconchain.kaustinen.ethpandaops.io:
+  beaconchain.kaustinen.ethdevops.io:
     mode: http
-  forkmon.kaustinen.ethpandaops.io:
+  forkmon.kaustinen.ethdevops.io:
     mode: http
-  rpc.kaustinen.ethpandaops.io:
+  rpc.kaustinen.ethdevops.io:
     mode: http
 
 haproxy_frontends:
   - name: host_kaustinen
-    address: kaustinen.ethpandaops.io
+    address: kaustinen.ethdevops.io
     backend: host_kaustinen
   - name: host_kaustinen_faucet
-    address: faucet.kaustinen.ethpandaops.io
+    address: faucet.kaustinen.ethdevops.io
     backend: host_kaustinen_faucet
   - name: host_kaustinen_explorer
-    address: explorer.kaustinen.ethpandaops.io
+    address: explorer.kaustinen.ethdevops.io
     backend: host_kaustinen_explorer
   - name: host_kaustinen_ethstats
-    address: ethstats.kaustinen.ethpandaops.io
+    address: ethstats.kaustinen.ethdevops.io
     backend: host_kaustinen_ethstats
   - name: host_kaustinen_beaconchain
-    address: beaconchain.kaustinen.ethpandaops.io
+    address: beaconchain.kaustinen.ethdevops.io
     backend: host_kaustinen_beaconchain
   - name: host_kaustinen_forkmon
-    address: forkmon.kaustinen.ethpandaops.io
+    address: forkmon.kaustinen.ethdevops.io
     backend: host_kaustinen_forkmon
   - name: host_kaustinen_rpc
-    address: rpc.kaustinen.ethpandaops.io
+    address: rpc.kaustinen.ethdevops.io
     backend: host_kaustinen_rpc
 
 haproxy_backend_servers:

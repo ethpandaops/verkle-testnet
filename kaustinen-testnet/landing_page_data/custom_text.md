@@ -1,7 +1,11 @@
 ## General information
-enode for execution clients:
+Bootnodes:
 ```sh
-- "enode://67513370a8877e88b172786034fd666291adc2a356eecd644acd47f5e5f2cbf78a7aa36229757d4600b90f4bd3279b9f399bc8dabd375a9545cb51933a69ae0c@134.122.74.110:30303"
+cl_bootnode_enrs:
+  - "enr:-Ly4QJeoz6UeL2JL2h54iUU0IU2XFi8TnRFHZAIrzGCOuOS_ZG5d6w0w-hMJF00nzsT6i5Pu1v2qHMKDudQUZhvpzp0Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAqejCCAAaUIv__________gmlkgnY0gmlwhLI-49qJc2VjcDI1NmsxoQMKd2_x7QQbLg4VT0hWjPO_xrH8C0U1lTCqCE0lsO9fzohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+
+el_bootnode_enode:
+  - "enode://3da5fa6fb683a747a7258f93880ec5a28128e0c9a6272d9b0fa5aa27d182a6088b0d53f5fed214d5922d75220a6f31b56232273d48ded990db69e027fae8acfd@178.62.227.218:30303"
 ```
 
 ## Genesis configuration
