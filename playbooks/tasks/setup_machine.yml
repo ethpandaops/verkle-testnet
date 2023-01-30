@@ -1,19 +1,31 @@
-- name: Setup name and keys
+- name: Run bootstrap playbook to ensure basic stuff works and add oh-my-zsh
   hosts: all
+  remote_user: "{{ bootstrap_user }}"
+  gather_facts: true
   become: true
-  gather_facts: false
-  tasks:
-    - name: Add SSH keys from Github users
-      loop: "{{ github_user_pubkeys }}"
-      authorized_key:
-        user: "{{ ansible_user }}"
-        state: present
-        key: "https://github.com/{{ item }}.keys"
   roles:
     # Prepare system to be managed by Ansible.
     - role: robertdebock.bootstrap
       tags: [bootstrap]
-
+    - role: robertdebock.fail2ban
+      tags: [fail2ban]
+      vars:
+        - fail2ban_loglevel: INFO
+        - fail2ban_logtarget: /var/log/fail2ban.log
+        - fail2ban_maxretry: 10
+        - fail2ban_bantime: 6000
+    - role: gantsign.oh-my-zsh
+      users:
+        - username: "{{ bootstrap_user }}"
+          theme: powerlevel9k/powerlevel9
+  tasks:
+    - name: Set custom .zshrc config
+      lineinfile:
+        dest: "/home/{{ bootstrap_user }}/.zshrc"
+        state: present
+        regexp: "^{{ item.key }}="
+        line: '{{ item.key }}="{{ item.value }}"'
+      loop: "{{ oh_my_zsh_config | dict2items }}"
 
 - name: set hostname
   hosts: all
@@ -25,14 +37,14 @@
     - name: add myself to /etc/hosts
       lineinfile:
         dest: /etc/hosts
-        regexp: '^{{ ansible_host }}='
-        line: '{{ ansible_host }} {{ inventory_hostname }}'
+        regexp: "^{{ ansible_host }}="
+        line: "{{ ansible_host }} {{ inventory_hostname }}"
 
 - name: Setup general tools used and update system
   hosts:
     - all
   become: true
-  gather_facts: true  # Needed to check if 'ansible_distribution_release' is 'bionic'
+  gather_facts: true # Needed to check if 'ansible_distribution_release' is 'bionic'
   tasks:
     - name: Ubuntu universe repo and update
       block:
@@ -59,8 +71,27 @@
             name: python3-docker
             state: present
         - name: Add ansible user to docker group
-          shell: 'usermod -aG docker {{ ansible_user }}'
+          shell: "usermod -aG docker {{ ansible_user }}"
+        - name: Add bootstrap user to docker group
+          shell: "usermod -aG docker {{ bootstrap_user }}"
     - name: Reload service docker, in all cases
       ansible.builtin.service:
         name: docker
         state: restarted
+
+- name: install jq
+  hosts:
+    - all
+  become: true
+  tasks:
+    - name: Install jq
+      apt:
+        name: jq
+        state: present
+
+- name: Unconditionally reboot the machine with all defaults
+  hosts:
+    - all
+  become: true
+  tasks:
+    - reboot:

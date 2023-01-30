@@ -1,0 +1,73 @@
+certificates:
+  kaustinen.ethdevops.io:
+    mode: http
+  faucet.kaustinen.ethdevops.io:
+    mode: http
+  explorer.kaustinen.ethdevops.io:
+    mode: http
+  ethstats.kaustinen.ethdevops.io:
+    mode: http
+  beaconchain.kaustinen.ethdevops.io:
+    mode: http
+  forkmon.kaustinen.ethdevops.io:
+    mode: http
+  rpc.kaustinen.ethdevops.io:
+    mode: http
+
+haproxy_frontends:
+  - name: host_kaustinen
+    address: kaustinen.ethdevops.io
+    backend: host_kaustinen
+  - name: host_kaustinen_faucet
+    address: faucet.kaustinen.ethdevops.io
+    backend: host_kaustinen_faucet
+  - name: host_kaustinen_explorer
+    address: explorer.kaustinen.ethdevops.io
+    backend: host_kaustinen_explorer
+  - name: host_kaustinen_ethstats
+    address: ethstats.kaustinen.ethdevops.io
+    backend: host_kaustinen_ethstats
+  - name: host_kaustinen_beaconchain
+    address: beaconchain.kaustinen.ethdevops.io
+    backend: host_kaustinen_beaconchain
+  - name: host_kaustinen_forkmon
+    address: forkmon.kaustinen.ethdevops.io
+    backend: host_kaustinen_forkmon
+  - name: host_kaustinen_rpc
+    address: rpc.kaustinen.ethdevops.io
+    backend: host_kaustinen_rpc
+
+haproxy_backend_servers:
+  - name: host_kaustinen
+    address: 127.0.0.1:1313
+    options: 'check fall 3 rise 2'
+  - name: host_kaustinen_faucet
+    address: 127.0.0.1:8010
+    options: 'check fall 3 rise 2'
+  - name: host_kaustinen_explorer
+    address: 127.0.0.1:4567
+    options: 'check fall 3 rise 2'
+  - name: host_kaustinen_ethstats
+    address: 127.0.0.1:3000
+    options: 'check fall 3 rise 2'
+  - name: host_kaustinen_beaconchain
+    address: 127.0.0.1:3333
+    options: 'check fall 3 rise 2'
+  - name: host_kaustinen_forkmon
+    address: 127.0.0.1:8080
+    options: 'check fall 3 rise 2'
+  - name: host_kaustinen_rpc
+    address: 127.0.0.1:8545
+    options: 'check fall 3 rise 2'
+
+haproxy_stats_port: 8404
+haproxy_user: devops
+haproxy_group: devops
+haproxy_stats_user: devops
+haproxy_stats_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/verkle/verkle-haproxy-key') }}"
+
+haproxy_default_backend_name: host_kaustinen
+grafana_prometheus_network_name: explorernet
+
+le_email: parithosh@ethereum.org
+debian_certbot: false

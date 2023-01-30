@@ -1,0 +1,7 @@
+---
+# stop beacon/validator docker image
+- import_playbook: tasks/stop_beacon.yml
+- import_playbook: tasks/stop_validator.yml
+
+# starts beacon node docker container
+- import_playbook: tasks/start_beacon.yml

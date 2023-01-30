@@ -5,6 +5,7 @@ selected_validator_keys
 .idea
 custom_config.data.tar.gz
 vars.env
+vendor
 mnemonics.yaml
 scripts/venv
 pithos-testnet/secret.sh
@@ -15,4 +16,11 @@ explorerdata
 mergenet.yaml
 dshackle.yml
 precomp
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
 .DS_Store

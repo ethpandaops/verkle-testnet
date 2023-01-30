@@ -1,0 +1,27 @@
+roles:
+- name: cloudalchemy.node_exporter
+  version: "2.0.0"
+- name: cloudalchemy.prometheus
+  version: "2.16.2"
+- name: gantsign.oh-my-zsh
+  version: "2.4.0"
+- name: geerlingguy.docker
+  version: "6.0.3"
+- name: geerlingguy.firewall
+  version: "2.5.0"
+- src: geerlingguy.pip
+  version: "2.2.0"
+- name: robertdebock.bootstrap
+  version: "6.1.1"
+- name: robertdebock.fail2ban
+  version: "4.2.3"
+- name: ansible-haproxy
+  src:  https://github.com/ethpandaops/ansible-haproxy
+  version: 675a5614cc7f0db5816c83d105849efe8f76bcbe
+  scm: git
+
+collections:
+  - name: ansible.posix
+  - name: ethpandaops.general
+    source: https://github.com/ethpandaops/ansible-collection-general.git,master
+    type: git

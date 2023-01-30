@@ -14,20 +14,20 @@
         append: true
     - name: "Add generic authorized keys"
       loop: "{{ github_user_pubkeys }}"
-      authorized_key:
+      ansible.posix.authorized_key:
         user: "{{ bootstrap_user }}"
         state: present
         key: "https://github.com/{{ item }}.keys"
     - name: "Add client specific authorized keys"
       loop: "{{ el_github_external_user_pubkeys }}"
-      authorized_key:
+      ansible.posix.authorized_key:
         user: "{{ bootstrap_user }}"
         state: present
         key: "https://github.com/{{ item }}.keys"
       ignore_errors: yes
     - name: "Add client specific authorized keys"
       loop: "{{ cl_github_external_user_pubkeys }}"
-      authorized_key:
+      ansible.posix.authorized_key:
         user: "{{ bootstrap_user }}"
         state: present
         key: "https://github.com/{{ item }}.keys"
