@@ -102,3 +102,18 @@ module "verkle-lodestar-geth" {
   digital_ocean_project_name = local.digital_ocean_project_name
   #  vpc_uuid = digitalocean_vpc.vpc.id
 }
+
+module "verkle-nimbus-geth" {
+  droplet_count = 1
+
+  size =  "s-2vcpu-4gb-amd"
+  region = local.region
+  image = local.image
+  name = "verkle-nimbus-geth"
+  source = "../../modules/"
+
+  tags = concat(local.shared_project_tags,["beacon","validator","nimbus","execution","geth","beverly-hills-testnet"])
+  ssh_key_name = "barnabasbusa"
+  digital_ocean_project_name = local.digital_ocean_project_name
+  #  vpc_uuid = digitalocean_vpc.vpc.id
+}
