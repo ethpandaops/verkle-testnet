@@ -52,7 +52,7 @@ module "verkle_bootnode" {
   name = "verkle-bootnode"
   source = "../../modules/"
 
-  tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","explorer","bootnode","faucet", "ethstats_server","landing_page","reverse_proxy","beverly-hills-testnet"])
+  tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","explorer","bootnode","faucet", "ethstats_server","landing_page","forkmon","reverse_proxy","beverly-hills-testnet"])
   ssh_key_name = local.ssh_key_name
   digital_ocean_project_name = local.digital_ocean_project_name
 #  vpc_uuid = digitalocean_vpc.vpc.id
@@ -103,16 +103,46 @@ module "verkle-lodestar-geth" {
   #  vpc_uuid = digitalocean_vpc.vpc.id
 }
 
-module "verkle-nimbus-geth" {
-  droplet_count = 1
+module "beveryly-hills-nimbus-geth" {
+  droplet_count = 5
 
   size =  "s-2vcpu-4gb-amd"
   region = local.region
   image = local.image
-  name = "verkle-nimbus-geth"
+  name = "beveryly-hills-nimbus-geth"
   source = "../../modules/"
 
   tags = concat(local.shared_project_tags,["beacon","validator","nimbus","execution","geth","beverly-hills-testnet"])
+  ssh_key_name = "barnabasbusa"
+  digital_ocean_project_name = local.digital_ocean_project_name
+  #  vpc_uuid = digitalocean_vpc.vpc.id
+}
+
+module "beveryly-hills-lighthouse-geth" {
+  droplet_count = 5
+
+  size =  "s-2vcpu-4gb-amd"
+  region = local.region
+  image = local.image
+  name = "beveryly-hills-lighthouse-geth"
+  source = "../../modules/"
+
+  tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","beverly-hills-testnet"])
+  ssh_key_name = "barnabasbusa"
+  digital_ocean_project_name = local.digital_ocean_project_name
+  #  vpc_uuid = digitalocean_vpc.vpc.id
+}
+
+module "beveryly-hills-lodestar-geth" {
+  droplet_count = 5
+
+  size =  "s-2vcpu-4gb-amd"
+  region = local.region
+  image = local.image
+  name = "beveryly-hills-lodestar-geth"
+  source = "../../modules/"
+
+  tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet"])
   ssh_key_name = "barnabasbusa"
   digital_ocean_project_name = local.digital_ocean_project_name
   #  vpc_uuid = digitalocean_vpc.vpc.id

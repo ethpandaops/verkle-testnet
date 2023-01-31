@@ -6,8 +6,8 @@ cl_client_name: nimbus
 # Half with ethpandaops/nimbus:l1G-0bc3aa8
 # Half with ethpandaops/nimbus:unstable-c22384d
 
-beacon_image_name: ethpandaops/nimbus:unstable
-validator_image_name: ethpandaops/nimbus:unstable
+beacon_image_name: ethpandaops/nimbus:stable
+validator_image_name: ethpandaops/nimbus:stable
 beacon_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 
 cl_github_external_user_pubkeys:
