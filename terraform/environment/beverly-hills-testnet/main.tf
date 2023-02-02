@@ -88,21 +88,6 @@ module "verkle-teku-geth" {
   #  vpc_uuid = digitalocean_vpc.vpc.id
 }
 
-module "verkle-lodestar-geth" {
-  droplet_count = 1
-
-  size =  "s-2vcpu-4gb-amd"
-  region = local.region
-  image = local.image
-  name = "verkle-lodestar-geth"
-  source = "../../modules/"
-
-  tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet"])
-  ssh_key_name = local.ssh_key_name
-  digital_ocean_project_name = local.digital_ocean_project_name
-  #  vpc_uuid = digitalocean_vpc.vpc.id
-}
-
 # module "beveryly-hills-nimbus-geth" {
 #   droplet_count = 5
 
@@ -118,31 +103,46 @@ module "verkle-lodestar-geth" {
 #   #  vpc_uuid = digitalocean_vpc.vpc.id
 # }
 
-module "beveryly-hills-lighthouse-geth" {
-  droplet_count = 8
+# module "beveryly-hills-lighthouse-geth" {
+#   droplet_count = 8
 
-  size =  "s-2vcpu-4gb-amd"
-  region = local.region
-  image = local.image
-  name = "beveryly-hills-lighthouse-geth"
-  source = "../../modules/"
+#   size =  "s-2vcpu-4gb-amd"
+#   region = local.region
+#   image = local.image
+#   name = "beveryly-hills-lighthouse-geth"
+#   source = "../../modules/"
 
-  tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","beverly-hills-testnet"])
-  ssh_key_name = "barnabasbusa"
-  digital_ocean_project_name = local.digital_ocean_project_name
-  #  vpc_uuid = digitalocean_vpc.vpc.id
-}
+#   tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","beverly-hills-testnet"])
+#   ssh_key_name = "barnabasbusa"
+#   digital_ocean_project_name = local.digital_ocean_project_name
+#   #  vpc_uuid = digitalocean_vpc.vpc.id
+# }
+
+# module "beveryly-hills-lodestar-geth" {
+#   droplet_count = 8
+
+#   size =  "s-2vcpu-4gb-amd"
+#   region = local.region
+#   image = local.image
+#   name = "beveryly-hills-lodestar-geth"
+#   source = "../../modules/"
+
+#   tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet"])
+#   ssh_key_name = "barnabasbusa"
+#   digital_ocean_project_name = local.digital_ocean_project_name
+#   #  vpc_uuid = digitalocean_vpc.vpc.id
+# }
 
 module "beveryly-hills-lodestar-geth" {
-  droplet_count = 8
+  droplet_count = 10
 
   size =  "s-2vcpu-4gb-amd"
   region = local.region
   image = local.image
-  name = "beveryly-hills-lodestar-geth"
+  name = "beveryly-hills-teku-geth"
   source = "../../modules/"
 
-  tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet"])
+  tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet","newstyle"])
   ssh_key_name = "barnabasbusa"
   digital_ocean_project_name = local.digital_ocean_project_name
   #  vpc_uuid = digitalocean_vpc.vpc.id
