@@ -1,40 +1,40 @@
 certificates:
-  beverlyhills.ethdevops.io:
+  beverlyhills.ethpandaops.io:
     mode: http
-  faucet.beverlyhills.ethdevops.io:
+  faucet.beverlyhills.ethpandaops.io:
     mode: http
-  explorer.beverlyhills.ethdevops.io:
+  explorer.beverlyhills.ethpandaops.io:
     mode: http
-  ethstats.beverlyhills.ethdevops.io:
+  ethstats.beverlyhills.ethpandaops.io:
     mode: http
-  beaconchain.beverlyhills.ethdevops.io:
+  beaconchain.beverlyhills.ethpandaops.io:
     mode: http
-  forkmon.beverlyhills.ethdevops.io:
+  forkmon.beverlyhills.ethpandaops.io:
     mode: http
-  rpc.beverlyhills.ethdevops.io:
+  rpc.beverlyhills.ethpandaops.io:
     mode: http
 
 haproxy_frontends:
   - name: host_beverlyhills
-    address: beverlyhills.ethdevops.io
+    address: beverlyhills.ethpandaops.io
     backend: host_beverlyhills
   - name: host_beverlyhills_faucet
-    address: faucet.beverlyhills.ethdevops.io
+    address: faucet.beverlyhills.ethpandaops.io
     backend: host_beverlyhills_faucet
   - name: host_beverlyhills_explorer
-    address: explorer.beverlyhills.ethdevops.io
+    address: explorer.beverlyhills.ethpandaops.io
     backend: host_beverlyhills_explorer
   - name: host_beverlyhills_ethstats
-    address: ethstats.beverlyhills.ethdevops.io
+    address: ethstats.beverlyhills.ethpandaops.io
     backend: host_beverlyhills_ethstats
   - name: host_beverlyhills_beaconchain
-    address: beaconchain.beverlyhills.ethdevops.io
+    address: beaconchain.beverlyhills.ethpandaops.io
     backend: host_beverlyhills_beaconchain
   - name: host_beverlyhills_forkmon
-    address: forkmon.beverlyhills.ethdevops.io
+    address: forkmon.beverlyhills.ethpandaops.io
     backend: host_beverlyhills_forkmon
   - name: host_beverlyhills_rpc
-    address: rpc.beverlyhills.ethdevops.io
+    address: rpc.beverlyhills.ethpandaops.io
     backend: host_beverlyhills_rpc
 
 haproxy_backend_servers:

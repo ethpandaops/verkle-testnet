@@ -1,14 +1,14 @@
-## General information
-enode for execution clients:
-```sh
-- "enode://67513370a8877e88b172786034fd666291adc2a356eecd644acd47f5e5f2cbf78a7aa36229757d4600b90f4bd3279b9f399bc8dabd375a9545cb51933a69ae0c@134.122.74.110:30303"
+Bootnode ENRs: 
+```yaml
+{% for bootnode_enrs in bootnode_enrs %}
+"{{ bootnode_enrs }}"
+{% endfor %}
 ```
-
-## Genesis configuration
-### Execution layer clients
-
-```sh
-https://github.com/ethpandaops/verkle-testnet/blob/beverly-hills-relaunch/beverly-hills-testnet/custom_config_data/genesis.json
+Execution Layer bootnode Enodes: 
+```yaml
+{% for el_bootnode_enode in el_bootnode_enode %}
+"{{ el_bootnode_enode }}"
+{% endfor %}
 ```
 
 You can optimise the `geth init` time by using our precompiled data found [here](https://condrieu.fra1.digitaloceanspaces.com/precomp). 

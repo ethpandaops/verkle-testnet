@@ -38,10 +38,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QJk4WqRkjsX5c2CXtOra6HnxN-BMXnWhmhEQO9Bn9iABTJGdjUOurM7Btj1ouKaFkvTRoju5vz2GPmVON2dffQKGAX53x8JigmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-KG4QIw69kbR8fmuH2ahZ1eGK8EwpuNXQJuCVOhtK5ZXj7hQXmqT2xygjH52kWt9mzpZnNNbjDrJDX_LWNNyHuauew8DhGV0aDKQCGSdJgAJAhL__________4JpZIJ2NIJpcISGekpuiXNlY3AyNTZrMaEC4vWdfJW4B856YNu8twkOnmBHW32ep2_Fxp9WSALB12GDdGNwgiMog3VkcIIjKA"
-
+  - "enr:-KG4QGxDqnVuX00tUQgFiZru0b-niA6eiGx8VqQx3mBvTuS3f06m368nkT8CLqKM93thmT_5wT7ZyR3hBcuH5GAzd2sChGV0aDKQXQVwBAAJAhD__________4JpZIJ2NIJpcIS8pkjaiXNlY3AyNTZrMaEDNXW4KEsBOCLZn8XvvSMVpmGBfRdJDGWU-2YpwVCAkZuDdGNwgiMog3VkcIIjKA"
+  - "enr:-KG4QIrSLf53M-nCf_8ANpwyjS-oSVI57WqcMWiFVYhRGYxeQeNwye_QgAWX_RDcp5rACYxm5HywkSLA3HeIRcmQfkMDhGV0aDKQCGSdJgAJAhL__________4JpZIJ2NIJpcIS8pkjaiXNlY3AyNTZrMaEDNXW4KEsBOCLZn8XvvSMVpmGBfRdJDGWU-2YpwVCAkZuDdGNwgiMog3VkcIIjKA"
 el_bootnode_enode:
-  - "enode://80485311e1f22ab86630db23d5d77b7c67d535c7c2aa6df99f10b63250602b230093143b49b40640b227b97eb226c01eaed5a4eb5d66349d78371515b243f4cb@134.122.74.110:30303"
+  - "enode://512a643a4aa17284f8eb397ae5c467b996d8bcdf6e4b922d3e026c8d1184dcfbd0eb1532743ba65d989793f52b81f5c4f908022f79b4be72ad9e02ed04816568@188.166.72.218:30303"
 
 ##############################################
 # metric information
@@ -59,7 +59,7 @@ remote_write_username: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereu
 remote_write_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .password') }}"
 
 no_validator_keys: false
-ethstats_url: "ethstats.beverlyhills.ethdevops.io"
+ethstats_url: "ethstats.beverlyhills.ethpandaops.io"
 ethstats_password: "beverlyhills"
 
 ##############################################
@@ -154,5 +154,5 @@ firewall_allowed_udp_ports:
   - 443
 
 firewall_additional_rules:
-  - "iptables -A INPUT -p tcp --dport 8545 -s 134.122.74.110 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 4000 -s 134.122.74.110 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 188.166.72.218 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 4000 -s 188.166.72.218 -j ACCEPT"

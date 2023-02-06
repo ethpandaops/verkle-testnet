@@ -1,149 +1,208 @@
+////////////////////////////////////////////////////////////////////////////////////////
+//                            TERRAFORM PROVIDERS & BACKEND
+////////////////////////////////////////////////////////////////////////////////////////
 terraform {
   required_providers {
     digitalocean = {
       source = "digitalocean/digitalocean"
       version = "~> 2.0"
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 3.0"
+    }
+    sops = {
+      source  = "carlpett/sops"
+      version = "0.7.1"
+    }
   }
 }
-
 
 terraform {
   backend "s3" {
     skip_credentials_validation = true
     skip_metadata_api_check     = true
-    endpoint                    = "https://fra1.digitaloceanspaces.com"
+    endpoint                    = "https://ams3.digitaloceanspaces.com"
     region                      = "us-east-1"
-    bucket                      = "verkle-testnets"
-    key                         = "infrastructure/beverly-hills-testnet/terraform.tfstate"
+    bucket                      = "verkle"
+    key                         = "infrastructure/beverly-hills/terraform.tfstate"
+  }
+}
+////////////////////////////////////////////////////////////////////////////////////////
+//                                        VARIABLES
+////////////////////////////////////////////////////////////////////////////////////////
+variable "ethereum_network" {
+  type = string
+  default = "beverly-hills"
+}
+
+variable "digitalocean_project_name" {
+  type = string
+  default = "Verkle"
+}
+
+variable "digitalocean_ssh_key_name" {
+  type = string
+  default = "barnabasbusa"
+}
+
+variable "digitalocean_vpcs" {
+  type = map
+  default = {
+    "ams3" = {
+      ip_range = "10.100.189.0/24"
+    }
   }
 }
 
+variable "digitalocean_vm_groups" {
+  type = list
+  default = [
+    {
+      id = "teku-geth"
+      vms = {
+        "1" = {}
+        "2" = {}
+        "3" = {}
+        "4" = {}
+        "5" = {}
+        "6" = {}
+        "7" = {}
+        "8" = {}
+        "bootnode" = {tags = ["bootnode","tooling"]}
+      },
+    },
+    {
+      id = "lighthouse-geth"
+      vms = {
+        "1" = {}
+        "2" = {}
+        "3" = {}
+        "4" = {}
+        "5" = {}
+        "6" = {}
+      },
+    },
+    {
+      id = "lodestar-geth"
+      vms = {
+        "1" = {}
+        "2" = {}
+        "3" = {}
+        "4" = {}
+        "5" = {}
+        "6" = {}
+      },
+    },
+  ]
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+//                                        LOCALS
+////////////////////////////////////////////////////////////////////////////////////////
+
 
 locals {
-  ssh_key_name = "parithosh"
-  digital_ocean_project_name = "Verkle Testnets"
-  size = "s-4vcpu-8gb-amd"
-  region = "fra1"
-  image = "ubuntu-22-04-x64"
-  name = "beverlyHills"
-  vpc_name="beverlyHills"
-  vpc_ip_range="10.169.77.0/24"
-  vpc_region = "fra1"
-  shared_project_tags = [
-                            "Owner:Parithosh",
-                        ]
+  digitalocean_default_region = "ams3"
+  digitalocean_default_size   = "s-2vcpu-4gb-amd"
+  digitalocean_default_image  = "debian-11-x64"
+  digitalocean_global_tags = [
+    "Owner:Devops",
+    "EthNetwork:${var.ethereum_network}"
+  ]
 
+  # flatten vm_groups so that we can use it with for_each()
+  digitalocean_vms = flatten([
+    for group in var.digitalocean_vm_groups : [
+      for vm_key, vm in group.vms : {
+        id        = "${group.id}.${vm_key}"
+        group_key = group.id
+        vm_key    = vm_key
+
+        name        = try(vm.name, "${var.ethereum_network}-${group.id}-${vm_key}")
+        ssh_keys    = try(vm.ssh_keys, [data.digitalocean_ssh_key.main.fingerprint])
+        region      = try(vm.region, try(group.region, local.digitalocean_default_region))
+        image       = try(vm.image, local.digitalocean_default_image)
+        size        = try(vm.size, local.digitalocean_default_size)
+        resize_disk = try(vm.resize_disk, true)
+        monitoring  = try(vm.monitoring, true)
+        backups     = try(vm.backups, false)
+        ipv6        = try(vm.ipv6, false)
+        vpc_uuid    = try(vm.vpc_uuid, try(
+          digitalocean_vpc.main[vm.region].id,
+          digitalocean_vpc.main[try(group.region, local.digitalocean_default_region)].id
+        ))
+
+        tags = concat(local.digitalocean_global_tags, try(vm.tags,[]))
+      }
+    ]
+  ])
 }
 
-resource "digitalocean_vpc" "vpc" {
-  name = local.vpc_name
-  ip_range = local.vpc_ip_range
-  region = local.vpc_region
+////////////////////////////////////////////////////////////////////////////////////////
+//                                  DIGITALOCEAN RESOURCES
+////////////////////////////////////////////////////////////////////////////////////////
+data "digitalocean_project" "main" {
+  name = var.digitalocean_project_name
 }
 
-
-module "verkle_bootnode" {
-  droplet_count = 1
-
-  size =  "s-8vcpu-16gb-amd"
-  region = local.region
-  image = local.image
-  name = "verkle-bootnode"
-  source = "../../modules/"
-
-  tags = concat(local.shared_project_tags,["beverly-hills-testnet","beacon","validator","lighthouse","execution","geth","explorer","bootnode","faucet", "ethstats_server","landing_page","forkmon","reverse_proxy"])
-  ssh_key_name = local.ssh_key_name
-  digital_ocean_project_name = local.digital_ocean_project_name
-#  vpc_uuid = digitalocean_vpc.vpc.id
+data "digitalocean_ssh_key" "main" {
+  name = var.digitalocean_ssh_key_name
 }
 
-module "verkle-lighthouse-geth" {
-  droplet_count = 2
-
-  size =  "s-2vcpu-4gb-amd"
-  region = local.region
-  image = local.image
-  name = "verkle-lighthouse-geth"
-  source = "../../modules/"
-
-  tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","beverly-hills-testnet"])
-  ssh_key_name = local.ssh_key_name
-  digital_ocean_project_name = local.digital_ocean_project_name
-  #  vpc_uuid = digitalocean_vpc.vpc.id
+resource "digitalocean_vpc" "main" {
+  for_each = var.digitalocean_vpcs
+  name     = try(each.value.name, "${var.ethereum_network}-${each.key}")
+  region   = each.key
+  ip_range = each.value.ip_range
 }
 
-module "verkle-teku-geth" {
-  droplet_count = 1
-
-  size =  "s-2vcpu-4gb-amd"
-  region = local.region
-  image = local.image
-  name = "verkle-teku-geth"
-  source = "../../modules/"
-
-  tags = concat(local.shared_project_tags,["beacon","validator","teku","execution","geth","beverly-hills-testnet"])
-  ssh_key_name = local.ssh_key_name
-  digital_ocean_project_name = local.digital_ocean_project_name
-  #  vpc_uuid = digitalocean_vpc.vpc.id
+resource "digitalocean_droplet" "main" {
+  for_each = {
+    for vm in local.digitalocean_vms : "${vm.id}" => vm
+  }
+  name        = each.value.name
+  region      = each.value.region
+  ssh_keys    = each.value.ssh_keys
+  image       = each.value.image
+  size        = each.value.size
+  resize_disk = each.value.resize_disk
+  monitoring  = each.value.monitoring
+  backups     = each.value.backups
+  ipv6        = each.value.ipv6
+  vpc_uuid    = each.value.vpc_uuid
+  tags        = each.value.tags
 }
 
-# module "beveryly-hills-nimbus-geth" {
-#   droplet_count = 5
+resource "digitalocean_project_resources" "droplets" {
+  for_each = digitalocean_droplet.main
+  project = data.digitalocean_project.main.id
+  resources = [each.value.urn]
+}
 
-#   size =  "s-2vcpu-4gb-amd"
-#   region = local.region
-#   image = local.image
-#   name = "beveryly-hills-nimbus-geth"
-#   source = "../../modules/"
+////////////////////////////////////////////////////////////////////////////////////////
+//                          GENERATED FILES AND OUTPUTS
+////////////////////////////////////////////////////////////////////////////////////////
 
-#   tags = concat(local.shared_project_tags,["beacon","validator","nimbus","execution","geth","beverly-hills-testnet"])
-#   ssh_key_name = "barnabasbusa"
-#   digital_ocean_project_name = local.digital_ocean_project_name
-#   #  vpc_uuid = digitalocean_vpc.vpc.id
-# }
-
-# module "beveryly-hills-lighthouse-geth" {
-#   droplet_count = 8
-
-#   size =  "s-2vcpu-4gb-amd"
-#   region = local.region
-#   image = local.image
-#   name = "beveryly-hills-lighthouse-geth"
-#   source = "../../modules/"
-
-#   tags = concat(local.shared_project_tags,["beacon","validator","lighthouse","execution","geth","beverly-hills-testnet"])
-#   ssh_key_name = "barnabasbusa"
-#   digital_ocean_project_name = local.digital_ocean_project_name
-#   #  vpc_uuid = digitalocean_vpc.vpc.id
-# }
-
-# module "beveryly-hills-lodestar-geth" {
-#   droplet_count = 8
-
-#   size =  "s-2vcpu-4gb-amd"
-#   region = local.region
-#   image = local.image
-#   name = "beveryly-hills-lodestar-geth"
-#   source = "../../modules/"
-
-#   tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet"])
-#   ssh_key_name = "barnabasbusa"
-#   digital_ocean_project_name = local.digital_ocean_project_name
-#   #  vpc_uuid = digitalocean_vpc.vpc.id
-# }
-
-module "beveryly-hills-lodestar-geth" {
-  droplet_count = 10
-
-  size =  "s-2vcpu-4gb-amd"
-  region = local.region
-  image = local.image
-  name = "beveryly-hills-teku-geth"
-  source = "../../modules/"
-
-  tags = concat(local.shared_project_tags,["beacon","validator","lodestar","execution","geth","beverly-hills-testnet","newstyle"])
-  ssh_key_name = "barnabasbusa"
-  digital_ocean_project_name = local.digital_ocean_project_name
-  #  vpc_uuid = digitalocean_vpc.vpc.id
+resource "local_file" "ansible_inventory" {
+  content = templatefile("ansible_inventory.tmpl",
+    {
+      groups = merge(
+        { for group in var.digitalocean_vm_groups: "${group.id}" => true },
+      )
+      hosts  = merge(
+        {
+          for key, server in digitalocean_droplet.main: "do.${key}" => {
+            ip = "${server.ipv4_address}"
+            group = split(".", key)[0]
+            tags = "${server.tags}"
+            hostname = "${var.ethereum_network}-${split(".", key)[0]}-${split(".", key)[1]}"
+            cloud  = "digitalocean"
+            region = "${server.region}"
+          }
+        }
+      )
+    }
+  )
+  filename = "../../../${var.ethereum_network}-testnet/inventory/inventory.ini"
 }
