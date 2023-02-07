@@ -38,7 +38,7 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QJk4WqRkjsX5c2CXtOra6HnxN-BMXnWhmhEQO9Bn9iABTJGdjUOurM7Btj1ouKaFkvTRoju5vz2GPmVON2dffQKGAX53x8JigmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
-  - "enr:-KG4QMSsb0lEKhSmnuhZ_A5Sbbe3TIcPV935o9H0PYpV6FYdfZwbnXpUMS_Z3dylyab7f0dDFgzhwet7XYEgP2Pb6LYDhGV0aDKQCGSdJgAJAhL__________4JpZIJ2NIJpcIS8pkjaiXNlY3AyNTZrMaEC2IQDtkX4V61ZnAAUWylwIC4CMCA8PNdENndjdxAumoaDdGNwgiMog3VkcIIjKA"
+  - "enr:-KG4QAchz0wKeD_-Ilw3oit1eMX_wL3SaFyJsEbGmZkYo7KDdxh0sTT056NQc5_XBb9BhBB-imGe3VJOV3xJFBhvhOMShGV0aDKQCGSdJgAJAhL__________4JpZIJ2NIJpcIS8pkjaiXNlY3AyNTZrMaEC2IQDtkX4V61ZnAAUWylwIC4CMCA8PNdENndjdxAumoaDdGNwgiMog3VkcIIjKA"
 el_bootnode_enode:
   - "enode://4f9661a9d6e0e82ad377fd3802d3ec2023a309e871b6a26738c819d88bb5065fb7dcbc7e5614f53ce73d9d1452359d4c84c670ae49e5899d47b6da33d07a5254@188.166.72.218:30303"
 ##############################################
