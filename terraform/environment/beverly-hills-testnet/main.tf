@@ -81,6 +81,7 @@ variable "digitalocean_vm_groups" {
         "4" = {}
         "5" = {}
         "6" = {}
+        "bootnode" = {tags = ["bootnode"]}
       },
     },
     {
