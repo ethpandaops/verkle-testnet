@@ -1,8 +1,8 @@
 txfuzz_container_name: tx-fuzz
-txfuzz_image_name: ethpandaops/tx-fuzz:latest
+txfuzz_image_name: kurtosistech/tx-fuzz:latest
 
-rpc_url: http://kaustinen-testnet-lighthouse-geth-1.ethpandaops.io:8545
-txfuzz_private_key: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/verkle/verkle-txfuzz-key') }}"
-txfuzz_public_key: "0x2cA5F489CC1Fd1CEC24747B64E8dE0F4A6A850E1"
+rpc_url: http://kaustinen-testnet-lighthouse-geth-3.ethpandaops.io:8545/
+txfuzz_private_key: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/verkle/beverly-txfuzz-key') }}"
+txfuzz_public_key: "0x9791DeD6e5D3d5Dafca71Bb7Bb2A14187D17e32E"
 
-txfuzz_start_args: "spam --no-al --seed={{chainID}} --sk={{txfuzz_private_key}} --rpc={{rpc_url}} --txcount 1"
+txfuzz_start_args: "{{rpc_url}} spam {{txfuzz_private_key}} {{txfuzz_public_key}}"
