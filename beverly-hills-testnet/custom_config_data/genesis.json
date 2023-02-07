@@ -1,6 +1,6 @@
 {
   "config": {
-    "chainId": 69420,
+    "chainId": 90210,
     "homesteadBlock": 0,
     "eip150Block": 0,
     "eip155Block": 0,
@@ -13,7 +13,7 @@
     "londonBlock": 0,
     "mergeForkBlock": 0,
     "terminalTotalDifficulty": 0,
-    "shanghaiTime": 7083549724306143520080
+    "shanghaiTime": 7083549724306143525360
   },
   "alloc": {
     "0x0000000000000000000000000000000000000000": {
@@ -847,5 +847,5 @@
   "nonce": "0x1234",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "timestamp": "1675699800"
+  "timestamp": "1675705080"
 }
