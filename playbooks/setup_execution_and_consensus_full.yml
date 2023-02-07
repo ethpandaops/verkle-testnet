@@ -20,6 +20,10 @@
   when: (testnet_type == 'custom') or
     (testnet_type == 'prater' and cl_client_name == 'prysm')
 
+# inits geth precomp instance
+- import_playbook: tasks/upload_precompile.yml
+  when: el_client_name == 'geth' or el_client_name == 'erigon'
+
 # inits geth instance
 - import_playbook: tasks/init_geth_node.yml
   when: el_client_name == 'geth' or el_client_name == 'erigon'

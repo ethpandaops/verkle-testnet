@@ -1,0 +1,13 @@
+- name: Upload precompile data
+  hosts: geth
+  gather_facts: true
+  tasks:
+  - name: Creates el dir
+    file:
+      path: "{{testnet_dir}}"
+      state: directory
+  - name: move precompile to el node dir
+    ansible.builtin.get_url:
+      url: https://condrieu.fra1.digitaloceanspaces.com/precomp
+      dest: "{{testnet_dir}}/precomp"
+      mode: '755'
