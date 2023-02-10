@@ -69,7 +69,7 @@ variable "digitalocean_vm_groups" {
         "6" = {}
         "7" = {}
         "8" = {}
-        "bootnode" = {tags = ["bootnode","tooling"]}
+        "bootnode" = {tags = "bootnode,tooling", size = "s-4vcpu-8gb-amd"}
       },
     },
     {
@@ -81,7 +81,7 @@ variable "digitalocean_vm_groups" {
         "4" = {}
         "5" = {}
         "6" = {}
-        "bootnode" = {tags = ["bootnode"]}
+        "bootnode" = {tags = "bootnode", size = "s-4vcpu-8gb-amd"}
       },
     },
     {
@@ -134,7 +134,7 @@ locals {
           digitalocean_vpc.main[try(group.region, local.digitalocean_default_region)].id
         ))
 
-        tags = concat(local.digitalocean_global_tags, try(vm.tags,[]))
+        tags = concat(local.digitalocean_global_tags, try(split(",", vm.tags),[]))
       }
     ]
   ])

@@ -8,7 +8,7 @@ CONFIG_NAME: 'beverlyhills' # needs to exist because of Prysm. Otherwise it conf
 MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 320
 # Mar-01-2021 08:53:32 AM +UTC
 # This is an invalid valid and should be updated when you create the genesis
-MIN_GENESIS_TIME: 1675782000
+MIN_GENESIS_TIME: 1676038202
 GENESIS_FORK_VERSION: 0x00090210
 GENESIS_DELAY: 120
 
