@@ -39,6 +39,7 @@ validator_volumes:
 beacon_start_args: >
   beacon
         --dataDir=/beacondata
+        --network sepolia
         --paramsFile=/custom_config_data/config.yaml
         --genesisStateFile=/custom_config_data/genesis.ssz
         --port={{ beacon_p2p_port }}

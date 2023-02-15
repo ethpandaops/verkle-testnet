@@ -32,7 +32,7 @@ beacon_log_level: info
 beacon_start_args: >
   nimbus_beacon_node
   --non-interactive=true
-  --network="/custom_config_data"
+  --network=sepolia
   --max-peers="{{hi_peer_count}}"
   --data-dir="/beacondata"
   --web3-url={{execution_endpoint}}

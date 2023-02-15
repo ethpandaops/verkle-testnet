@@ -18,6 +18,7 @@ geth_init_args: >
 
 el_start_args: >
   --datadir=/eldata
+  --sepolia
   --networkid={{chainID}}
   --http --http.api "net,eth,debug,engine,web3"
   --http.port {{el_rpc_port}}

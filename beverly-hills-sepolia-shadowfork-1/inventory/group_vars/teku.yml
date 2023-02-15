@@ -25,7 +25,7 @@ beacon_volumes:
 # arguments to run the containers with
 ##############################################
 beacon_start_args: >
-  --network="/custom_config_data/config.yaml"
+  --network=sepolia
   --initial-state="/custom_config_data/genesis.ssz"
   --data-path="/beacondata"
   --data-storage-mode=PRUNE
