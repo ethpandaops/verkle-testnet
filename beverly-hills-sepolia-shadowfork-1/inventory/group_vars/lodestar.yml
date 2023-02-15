@@ -40,6 +40,7 @@ beacon_start_args: >
   beacon
         --dataDir=/beacondata
         --network sepolia
+        --checkpointSyncUrl=https://checkpoint-sync.sepolia.ethpandaops.io
         --paramsFile=/custom_config_data/config.yaml
         --genesisStateFile=/custom_config_data/genesis.ssz
         --port={{ beacon_p2p_port }}

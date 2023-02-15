@@ -26,7 +26,7 @@ beacon_volumes:
 ##############################################
 beacon_start_args: >
   --network=sepolia
-  --initial-state="/custom_config_data/genesis.ssz"
+  --initial-state=https://checkpoint-sync.sepolia.ethpandaops.io/eth/v2/debug/beacon/states/finalized
   --data-path="/beacondata"
   --data-storage-mode=PRUNE
   --p2p-enabled=true
@@ -55,7 +55,7 @@ beacon_start_args: >
   {% endif %}
   --ee-jwt-secret-file="/jwtsecret"
   --Xlog-include-p2p-warnings-enabled
-  --Xmetrics-block-timing-tracking-enabled
+  --metrics-block-timing-tracking-enabled
   --Xprogressive-balances-mode=USED
 
 

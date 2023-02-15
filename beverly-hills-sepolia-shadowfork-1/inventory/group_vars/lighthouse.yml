@@ -33,9 +33,9 @@ beacon_start_args: >
   lighthouse
   --debug-level="{{ beacon_log_level | lower }}"
   --datadir "/beacondata"
-  --testnet-dir="/custom_config_data"
   bn
   --network sepolia
+  --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
   --disable-enr-auto-update
   --enr-address={{ansible_host}}
   --enr-tcp-port={{beacon_p2p_port}} --enr-udp-port={{beacon_p2p_port}}
