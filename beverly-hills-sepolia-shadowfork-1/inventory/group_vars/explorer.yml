@@ -9,10 +9,10 @@ execution_explorer_image_name: "parithoshj/verkle-explorer:v0.0.9"
 
 explorer_first_block: 0
 explorer_ip_address: "134.122.74.110"
-el_rpc_url: "https://rpc.beverlyhills.ethdevops.io"
+el_rpc_url: "https://rpc.beverly-hills-shadowfork-1-shadowfork-1.ethdevops.io"
 el_deposit_contract_first_block: 0
 
-execution_rpc_url: http://rpc.beverlyhills.ethdevops.io:8545
+execution_rpc_url: http://rpc.beverly-hills-shadowfork-1-shadowfork-1.ethdevops.io:8545
 
 explorer_host_dir: "{{home_dir}}/verkle-block-explorer"
 

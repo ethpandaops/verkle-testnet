@@ -1,40 +1,40 @@
 certificates:
-  beverlyhills.ethpandaops.io:
+  beverly-hills-shadowfork-1.ethpandaops.io:
     mode: http
-  faucet.beverlyhills.ethpandaops.io:
+  faucet.beverly-hills-shadowfork-1.ethpandaops.io:
     mode: http
-  explorer.beverlyhills.ethpandaops.io:
+  explorer.beverly-hills-shadowfork-1.ethpandaops.io:
     mode: http
-  ethstats.beverlyhills.ethpandaops.io:
+  ethstats.beverly-hills-shadowfork-1.ethpandaops.io:
     mode: http
-  beaconchain.beverlyhills.ethpandaops.io:
+  beaconchain.beverly-hills-shadowfork-1.ethpandaops.io:
     mode: http
-  forkmon.beverlyhills.ethpandaops.io:
+  forkmon.beverly-hills-shadowfork-1.ethpandaops.io:
     mode: http
-  rpc.beverlyhills.ethpandaops.io:
+  rpc.beverly-hills-shadowfork-1.ethpandaops.io:
     mode: http
 
 haproxy_frontends:
   - name: host_beverlyhills
-    address: beverlyhills.ethpandaops.io
+    address: beverly-hills-shadowfork-1.ethpandaops.io
     backend: host_beverlyhills
   - name: host_beverlyhills_faucet
-    address: faucet.beverlyhills.ethpandaops.io
+    address: faucet.beverly-hills-shadowfork-1.ethpandaops.io
     backend: host_beverlyhills_faucet
   - name: host_beverlyhills_explorer
-    address: explorer.beverlyhills.ethpandaops.io
+    address: explorer.beverly-hills-shadowfork-1.ethpandaops.io
     backend: host_beverlyhills_explorer
   - name: host_beverlyhills_ethstats
-    address: ethstats.beverlyhills.ethpandaops.io
+    address: ethstats.beverly-hills-shadowfork-1.ethpandaops.io
     backend: host_beverlyhills_ethstats
   - name: host_beverlyhills_beaconchain
-    address: beaconchain.beverlyhills.ethpandaops.io
+    address: beaconchain.beverly-hills-shadowfork-1.ethpandaops.io
     backend: host_beverlyhills_beaconchain
   - name: host_beverlyhills_forkmon
-    address: forkmon.beverlyhills.ethpandaops.io
+    address: forkmon.beverly-hills-shadowfork-1.ethpandaops.io
     backend: host_beverlyhills_forkmon
   - name: host_beverlyhills_rpc
-    address: rpc.beverlyhills.ethpandaops.io
+    address: rpc.beverly-hills-shadowfork-1.ethpandaops.io
     backend: host_beverlyhills_rpc
 
 haproxy_backend_servers:

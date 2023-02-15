@@ -15,7 +15,7 @@ hcaptcha_secret: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devo
 # faucet config
 ##############################################
 ether_to_transfer: 10000000000000000000
-faucet_rpc_url: https://rpc.beverlyhills.ethpandaops.io
+faucet_rpc_url: https://rpc.beverly-hills-shadowfork-1-shadowfork-1.ethpandaops.io
 faucet_private_key: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/verkle/verkle-faucet-key') }}"
 unit_name: "bETH"
 

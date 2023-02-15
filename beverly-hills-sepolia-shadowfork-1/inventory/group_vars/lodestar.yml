@@ -41,8 +41,6 @@ beacon_start_args: >
         --dataDir=/beacondata
         --network sepolia
         --checkpointSyncUrl=https://checkpoint-sync.sepolia.ethpandaops.io
-        --paramsFile=/custom_config_data/config.yaml
-        --genesisStateFile=/custom_config_data/genesis.ssz
         --port={{ beacon_p2p_port }}
         --enr.ip={{ ansible_host }}
         --enr.tcp={{ beacon_p2p_port }}
