@@ -21,6 +21,6 @@ resource "cloudflare_record" "dns-entry-bootnode-wildcard" {
   zone_id = data.sops_file.cloudflare.data["zones.ethpandaops-io.zone_id"]
   name    = "*.beverly-hills-shadowfork-1"
   type    = "CNAME"
-  value   = "beverlyhills.${data.sops_file.cloudflare.data["zones.ethpandaops-io.domain"]}"
+  value   = "beverly-hills-shadowfork-1.${data.sops_file.cloudflare.data["zones.ethpandaops-io.domain"]}"
   proxied = false
 }
