@@ -1,0 +1,19 @@
+## General information
+Bootnodes:
+```sh
+bootnode_enrs:
+  - "enr:-Iq4QJk4WqRkjsX5c2CXtOra6HnxN-BMXnWhmhEQO9Bn9iABTJGdjUOurM7Btj1ouKaFkvTRoju5vz2GPmVON2dffQKGAX53x8JigmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
+  - "enr:-KG4QMVP8mD7hvw_1Rpd7NMu4sTJu8fkX7wfiaFuMKA6xYMvIs6ActA8ozLDRohZvyBE7KkDBBzoonzXj_Wl_xAbw2gDhGV0aDKQyGB5ozAAAEX__________4JpZIJ2NIJpcISlFs-6iXNlY3AyNTZrMaECkxTF00417RiXsJO9nW1iuHEY3ztsvnd6iAaAw1USWt2DdGNwgiMog3VkcIIjKA"
+  - "enr:-Ly4QJdg589iOydHDBWxfZ-AOc-9diKpSNr2bPNtm0lFhPWwAxp-1F2Vv03j3myAGPYBBoO4AFoD9AKDwBAPavzLR5gBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDIYHmjMAAARf__________gmlkgnY0gmlwhM69AT-Jc2VjcDI1NmsxoQMOzvOsgAtSWbjvgJfcqV6_k_U4BMO-4nYk61pfwQQXwohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+
+el_bootnode_enode:
+  - "enode://82f0b6d6bc72ae3dc8846e432176660aee98e2751ed19b839c42739415196fbb3444e068ff4c4c7694773db2c61155ed0b3b1a68c9e680ba7a0954e13af1d9de@206.189.1.63:30303"
+  - "enode://a4144e346cb742104e635c0f7d68299789510791240407b20d69d5dd718fc2da10339f98e66897160934a109dbebbf2a6e5840beb831f0a132151e03d860eb79@165.22.207.186:30303"
+```
+
+## Genesis configuration
+### Execution layer clients
+
+```sh
+https://github.com/ethpandaops/verkle-testnet/tree/master/beverly-hills-sepolia-shadowfork-1/custom_config_data
+```

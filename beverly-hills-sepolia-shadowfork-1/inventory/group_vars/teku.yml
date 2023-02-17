@@ -25,8 +25,13 @@ beacon_volumes:
 # arguments to run the containers with
 ##############################################
 beacon_start_args: >
+  {% if deploy_mode == 'sync' %}
   --network=sepolia
-  --initial-state=https://checkpoint-sync.sepolia.ethpandaops.io/eth/v2/debug/beacon/states/finalized
+  --initial-state={{checkpoint_sync_url}}/eth/v2/debug/beacon/states/finalized
+  {% elif deploy_mode == 'shadowfork' %}
+  --network="/custom_config_data/config.yaml"
+  --initial-state="/custom_config_data/genesis.ssz"
+  {% endif %}
   --data-path="/beacondata"
   --data-storage-mode=PRUNE
   --p2p-enabled=true
@@ -35,6 +40,7 @@ beacon_start_args: >
   --p2p-advertised-port={{beacon_p2p_port}}
   --logging={{beacon_log_level}}
   --p2p-peer-upper-bound={{hi_peer_count}}
+  --eth1-endpoints="{{elendpoint}}"
   --ee-endpoint="{{execution_endpoint}}"
   {% if (bootnode_enrs is defined) and bootnode_enrs %}
   --p2p-discovery-bootnodes="{{ bootnode_enrs | join(',') }}"
@@ -47,15 +53,15 @@ beacon_start_args: >
   --metrics-host-allowlist="*"
   --rest-api-host-allowlist="*"
   --data-storage-non-canonical-blocks-enabled=true
-  {% if no_validator_keys|bool != 'true' %}
+  {% if no_validator_keys|bool != true %}
   --validators-proposer-default-fee-recipient={{fee_recipient}}
   --validators-graffiti="{{graffiti}}"
   --validator-keys="/validatordata/keys:/validatordata/secrets"
   --validators-keystore-locking-enabled=false
   {% endif %}
   --ee-jwt-secret-file="/jwtsecret"
-  --Xlog-include-p2p-warnings-enabled
-  --metrics-block-timing-tracking-enabled
+  --log-destination=console
+
 
 
 ##############################################

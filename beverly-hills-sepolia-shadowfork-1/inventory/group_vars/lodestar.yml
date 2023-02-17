@@ -39,17 +39,22 @@ validator_volumes:
 beacon_start_args: >
   beacon
         --dataDir=/beacondata
-        --network sepolia
-        --checkpointSyncUrl=https://checkpoint-sync.sepolia.ethpandaops.io
+        {% if deploy_mode == 'sync' %}
+        --network=sepolia
+        --checkpointSyncUrl={{checkpoint_sync_url}}
+        {% elif deploy_mode == 'shadowfork' %}
+        --paramsFile=/custom_config_data/config.yaml
+        --genesisStateFile=/custom_config_data/genesis.ssz
+        {% endif %}
         --port={{ beacon_p2p_port }}
         --enr.ip={{ ansible_host }}
         --enr.tcp={{ beacon_p2p_port }}
         --enr.udp={{ beacon_p2p_port }}
-          {% if (bootnode_enrs is defined) and bootnode_enrs %}
-          {% for bootnode_enr in bootnode_enrs %}
-          --bootnodes="{{ bootnode_enr }}"
-          {% endfor %}
-          {% endif %}
+        {% if (bootnode_enrs is defined) and bootnode_enrs %}
+        {% for bootnode_enr in bootnode_enrs %}
+        --bootnodes="{{ bootnode_enr }}"
+        {% endfor %}
+        {% endif %}
         --network.connectToDiscv5Bootnodes
         --rest.port={{beacon_api_port}}
         --execution.urls={{execution_endpoint}}
@@ -59,7 +64,6 @@ beacon_start_args: >
         --logLevel={{ beacon_log_level | lower }}
         --metrics
         --metrics.port={{ beacon_metrics_port }}
-        --eth1.depositContractDeployBlock=0
         --jwt-secret="/jwtsecret"
         --suggestedFeeRecipient={{fee_recipient}}
 
@@ -69,7 +73,11 @@ beacon_start_args: >
 validator_start_args: >
   validator
    --dataDir=/validatordata
+   {% if deploy_mode == 'sync' %}
+   --network=sepolia
+   {% elif deploy_mode == 'shadowfork' %}
    --paramsFile=/custom_config_data/config.yaml
+   {% endif %}
    --keystoresDir=/validatordata/keystores
    --secretsDir=/validatordata/secrets/
    --server={{beacon_endpoint}}

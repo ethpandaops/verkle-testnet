@@ -1,0 +1,85 @@
+# stop all beacons, this will halt the EL chain and allow us to collect genesis data
+- import_playbook: tasks/stop_beacon.yml
+
+- name: Wait for user prompt
+  hosts: all
+  tasks:
+    - name: Halting to generate genesis data, Please hit any key to continue with the shadow fork
+      pause:
+        prompt: Please confirm that genesis data has been updated, variables testnet_type and deploy_mode and we are ready to continue! Press return to continue. Press Ctrl+c and then "a" to abort
+
+- name: Refresh Host Inventory at Runtime
+  hosts: all
+  gather_facts: True
+  vars_files:
+    - "{{inventory_dir}}/group_vars/all.yaml"
+  tasks:
+    - meta: refresh_inventory
+
+# Wipe all CL data, stop all containers, leave EL data alone for shadowfork
+- import_playbook: prepare_for_shadowfork_clears_cl_data.yml
+
+# Move new testnet configs to all bootnodes
+- import_playbook: setup_execution_and_consensus_full.yml
+  when: "'bootnode' in group_names"
+
+# Fetch bootnode information
+- name: Get bootnode enode
+  hosts: bootnode
+  gather_facts: false
+  tasks:
+    - name: Wait for EL port to be open, don't start checking for 10 seconds
+      ansible.builtin.wait_for:
+        port: "{{el_rpc_port}}"
+        delay: 10
+    - name: Wait for CL port to be open, don't start checking for 10 seconds
+      ansible.builtin.wait_for:
+        port: "{{beacon_api_port}}"
+        delay: 10
+    - name: Get enode from logs
+      shell: docker logs {{el_client_name}} 2>&1 | grep enode:// | sed -z 's/.*enode:\/\///'
+      register: enode_noprefix_cmd
+    - name: Set each node's own enode
+      set_fact:
+        bootnode_enode: "enode://{{enode_noprefix_cmd.stdout}}"
+    - name: Get enr from beacon API
+      shell: curl -s {{beacon_endpoint}}/eth/v1/node/identity
+      register: fetched_from_api_bootnode_enr
+    - name: Set each node's own enode
+      set_fact:
+        fetched_bootnode_enr:  "{{( fetched_from_api_bootnode_enr.stdout | from_json)['data']['enr'] }}"
+
+# Append existing bootnodes with new ones for the shadow fork
+# This will imply the nodes peer with regular testnet as well as shadow fork nodes, i.e: import transactions
+- name: Override enode and enrs
+  hosts: all
+  gather_facts: true
+  vars:
+    bootnode_enrs: []
+  tasks:
+    - name: Create a map with all node's enodes
+      with_items: "{{ groups['bootnode'] }}"
+      ignore_errors: yes
+      set_fact:
+        el_bootnode_enode: "{{hostvars[item]['el_bootnode_enode'] + [hostvars[item]['bootnode_enode']]}}"
+    - name: Create a map with all node's enrs
+      with_items: "{{ groups['bootnode'] }}"
+      ignore_errors: yes
+      set_fact:
+        bootnode_enrs: "{{hostvars[item]['bootnode_enrs'] + [hostvars[item]['fetched_bootnode_enr']]}}"
+
+# Debug step to ensure bootnode enr and enodes look correct
+- name: Get bootnode enode
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: bootnode_enode defined in previous step
+      debug:
+        var: el_bootnode_enode
+    - name: bootnode_enode defined in previous step
+      debug:
+        var: bootnode_enrs
+
+# Start rest of the network
+- import_playbook: setup_execution_and_consensus_full.yml
+  when: "'bootnode' not in group_names"

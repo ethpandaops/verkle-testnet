@@ -1,5 +1,5 @@
 el_client_name: geth
-el_image_name: ethereum/client-go:latest
+el_image_name: ethpandaops/geth:master-13d7de7
 execution_endpoint: http://127.0.0.1:{{el_engine_snoop_port}}
 
 el_memory: 5000M
@@ -18,9 +18,13 @@ geth_init_args: >
 
 el_start_args: >
   --datadir=/eldata
-  --sepolia
-  --networkid={{chainID}}
-  --http --http.api "net,eth,debug,engine,web3"
+    {% if deploy_mode == 'sync' %}
+    --sepolia
+    {% elif deploy_mode == 'shadowfork' %}
+    --networkid={{chainID}}
+    --syncmode=full
+    {% endif %}
+  --http --http.api "net,eth,debug,engine,web3,admin"
   --http.port {{el_rpc_port}}
   --http.addr 0.0.0.0
   --http.corsdomain "*"
@@ -36,12 +40,13 @@ el_start_args: >
   --allow-insecure-unlock
   --vmodule=catalyst=5
   --metrics --pprof --pprof.addr 0.0.0.0 --pprof.port={{el_metrics_port}}
-  --syncmode=full
-  --cache.preimages
+  {% if (ethstats_enabled) %}
   --ethstats={{inventory_hostname}}:{{ethstats_password}}@{{ethstats_url}}
+  {% endif %}
   {% if (el_bootnode_enode is defined) and el_bootnode_enode %}
   --bootnodes="{{ el_bootnode_enode | join(',') }}"
   {% endif %}
+  --cache.preimages
 
 el_user_id: "1000:1000"
 

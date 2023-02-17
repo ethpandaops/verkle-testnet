@@ -29,19 +29,28 @@ beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 ##############################################
 # testnet specific information
 ##############################################
-testnet_type: sepolia
+testnet_type: custom
 eth2_network_name: beverly-hills-sepolia-shadowfork-1
 cl_network_name: beverly-hills-sepolia-shadowfork-1
 chainID: 11155111
+deploy_mode: shadowfork
+no_validator_keys: false
+checkpoint_sync_url: "https://checkpoint-sync.sepolia.ethpandaops.io/"
 fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 
 # enter bootnodes here if needed
 bootnode_enrs:
   - "enr:-Iq4QJk4WqRkjsX5c2CXtOra6HnxN-BMXnWhmhEQO9Bn9iABTJGdjUOurM7Btj1ouKaFkvTRoju5vz2GPmVON2dffQKGAX53x8JigmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
+  - "enr:-KG4QMVP8mD7hvw_1Rpd7NMu4sTJu8fkX7wfiaFuMKA6xYMvIs6ActA8ozLDRohZvyBE7KkDBBzoonzXj_Wl_xAbw2gDhGV0aDKQyGB5ozAAAEX__________4JpZIJ2NIJpcISlFs-6iXNlY3AyNTZrMaECkxTF00417RiXsJO9nW1iuHEY3ztsvnd6iAaAw1USWt2DdGNwgiMog3VkcIIjKA"
+  - "enr:-Ly4QJdg589iOydHDBWxfZ-AOc-9diKpSNr2bPNtm0lFhPWwAxp-1F2Vv03j3myAGPYBBoO4AFoD9AKDwBAPavzLR5gBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDIYHmjMAAARf__________gmlkgnY0gmlwhM69AT-Jc2VjcDI1NmsxoQMOzvOsgAtSWbjvgJfcqV6_k_U4BMO-4nYk61pfwQQXwohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
   - "enode://9246d00bc8fd1742e5ad2428b80fc4dc45d786283e05ef6edbd9002cbc335d40998444732fbe921cb88e1d2c73d1b1de53bae6a2237996e9bfe14f871baf7066@18.168.182.86:30303"
   - "enode://5696d41cd75915bda76fada7b10c704ab8b19719d3510559f1218d0bb9d64649c0e02b3727ccac45a747ddfd536fa14b87e7b4d6bfc2556c53e2b2da28154358@167.99.217.157:30303"
+  - "enode://35a02bf6fd071008a7bf4e476a93b36a6f9fc914689bf425f2818f3eaa113dffb220f87152e43f0331b088e80be59aeaafa2385f930c1bdd89a548944912b9f3@128.199.34.132:30303"
+  - "enode://abba0d9b369fec29931d026d8df4f29c09b5ff071f32c0b2d0ce7abd833ae58facd964636c31aa428fd8c59aad8d3d092f9ef7d873f25c519b6c1d2fed03b1a7@206.189.96.21:30303"
+  - "enode://82f0b6d6bc72ae3dc8846e432176660aee98e2751ed19b839c42739415196fbb3444e068ff4c4c7694773db2c61155ed0b3b1a68c9e680ba7a0954e13af1d9de@206.189.1.63:30303"
+  - "enode://a4144e346cb742104e635c0f7d68299789510791240407b20d69d5dd718fc2da10339f98e66897160934a109dbebbf2a6e5840beb831f0a132151e03d860eb79@165.22.207.186:30303"
 
 ##############################################
 # metric information
@@ -54,12 +63,11 @@ remote_write_auth: true
 eth_metrics_exporter_enabled: true
 cl_validator_metrics_enabled: false
 eth_metrics_exporter_name: "metrics-exporter"
-eth_metrics_exporter_image: "samcm/ethereum-metrics-exporter:0.17.0"
+eth_metrics_exporter_image: "samcm/ethereum-metrics-exporter:0.19.0"
 remote_write_username: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .username') }}"
 remote_write_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .password') }}"
 
-no_validator_keys: true
-ethstats_enabled: false
+ethstats_enabled: true
 ethstats_url: "ethstats.beverly-hills-shadowfork-1.ethpandaops.io"
 ethstats_password: "beverly-hills-shadowfork-1-shadowfork-1"
 
@@ -155,5 +163,7 @@ firewall_allowed_udp_ports:
   - 443
 
 firewall_additional_rules:
-  - "iptables -A INPUT -p tcp --dport 8545 -s 188.166.72.218 -j ACCEPT"
-  - "iptables -A INPUT -p tcp --dport 4000 -s 188.166.72.218 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 165.22.207.186 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 4000 -s 165.22.207.186 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 206.189.1.63 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 4000 -s 206.189.1.63 -j ACCEPT"

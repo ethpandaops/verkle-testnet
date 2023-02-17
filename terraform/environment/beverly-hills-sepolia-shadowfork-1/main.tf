@@ -43,7 +43,7 @@ variable "digitalocean_project_name" {
 
 variable "digitalocean_ssh_key_name" {
   type = string
-  default = "barnabasbusa"
+  default = "parithosh"
 }
 
 variable "digitalocean_vpcs" {
@@ -105,7 +105,7 @@ variable "digitalocean_vm_groups" {
 
 locals {
   digitalocean_default_region = "ams3"
-  digitalocean_default_size   = "s-2vcpu-4gb-amd"
+  digitalocean_default_size   = "s-4vcpu-8gb-amd"
   digitalocean_default_image  = "debian-11-x64"
   digitalocean_global_tags = [
     "Owner:Devops",

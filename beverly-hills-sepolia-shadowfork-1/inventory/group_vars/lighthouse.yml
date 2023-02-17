@@ -34,8 +34,12 @@ beacon_start_args: >
   --debug-level="{{ beacon_log_level | lower }}"
   --datadir "/beacondata"
   bn
-  --network sepolia
-  --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
+  {% if deploy_mode == 'sync' %}
+  --network=sepolia
+  --checkpoint-sync-url={{checkpoint_sync_url}}
+  {% elif deploy_mode == 'shadowfork' %}
+  --testnet-dir="/custom_config_data"
+  {% endif %}
   --disable-enr-auto-update
   --enr-address={{ansible_host}}
   --enr-tcp-port={{beacon_p2p_port}} --enr-udp-port={{beacon_p2p_port}}
@@ -53,16 +57,19 @@ beacon_start_args: >
   --graffiti="{{graffiti}}"
   --target-peers={{hi_peer_count}}
   --http-allow-sync-stalled
-  --disable-packet-filter
   --execution-endpoint={{execution_endpoint}}
   --suggested-fee-recipient={{fee_recipient}}
   --jwt-secrets="/jwtsecret"
-  --count-unrealized
+
 # in case of eth1 deposit endpoint problems: --dummy-eth1
 
 validator_start_args: >
   lighthouse
+  {% if deploy_mode == 'sync' %}
+  --network=sepolia
+  {% elif deploy_mode == 'shadowfork' %}
   --testnet-dir="/custom_config_data"
+  {% endif %}
   vc
   --validators-dir="/validatordata/validators"
   --secrets-dir="/validatordata/secrets"
