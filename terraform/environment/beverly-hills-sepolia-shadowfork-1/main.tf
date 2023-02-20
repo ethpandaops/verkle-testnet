@@ -78,7 +78,7 @@ variable "digitalocean_vm_groups" {
         "1" = {}
         "2" = {}
         "3" = {}
-        "4" = {}
+        "4" = { size = "c-16" }
         "5" = {}
         "6" = {}
         "bootnode" = {tags = "bootnode", size = "s-4vcpu-8gb-amd"}
