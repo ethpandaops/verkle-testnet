@@ -3,8 +3,8 @@
 ##############################################
 cl_client_name: lighthouse
 
-beacon_image_name: ethpandaops/lighthouse:verkle-trees-df31854
-validator_image_name: ethpandaops/lighthouse:verkle-trees-df31854
+beacon_image_name: ethpandaops/lighthouse:verkle-trees-full-a799e94
+validator_image_name: ethpandaops/lighthouse:verkle-trees-full-a799e94
 beacon_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 
 cl_github_external_user_pubkeys:
