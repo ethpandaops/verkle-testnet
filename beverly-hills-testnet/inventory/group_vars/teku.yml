@@ -3,8 +3,8 @@
 ##############################################
 cl_client_name: teku
 
-beacon_image_name: consensys/teku:23.1.1
-validator_image_name: consensys/teku:23.1.1
+beacon_image_name: consensys/teku:23.3.0
+validator_image_name: consensys/teku:23.3.0
 beacon_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
 
 eth2_github_external_user_pubkeys:
@@ -54,9 +54,6 @@ beacon_start_args: >
   --validators-keystore-locking-enabled=false
   {% endif %}
   --ee-jwt-secret-file="/jwtsecret"
-  --Xlog-include-p2p-warnings-enabled
-  --Xmetrics-block-timing-tracking-enabled
-  --Xprogressive-balances-mode=USED
 
 
 ##############################################

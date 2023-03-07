@@ -57,7 +57,7 @@ scrape_configs:
 {% endif %}
 
 {% if eth_metrics_exporter_enabled is sameas true %}
-
+{% if cl_client_name != "lodestar" %}
   - job_name: exporter
     static_configs:
     - labels:
@@ -65,7 +65,7 @@ scrape_configs:
         scrape_location: exporter
       targets:
       - localhost:{{ eth_metrics_exporter_port }}
-
+{% endif %}
 {% endif %}
 
 {% if el_client_name is defined %}

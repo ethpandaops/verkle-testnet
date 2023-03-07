@@ -1,5 +1,5 @@
 el_client_name: geth
-el_image_name: ethpandaops/geth:beverly-hills-head-ecf1a20
+el_image_name: ethpandaops/geth:beverly-hills-head-2d5ce8a
 execution_endpoint: http://127.0.0.1:{{el_engine_snoop_port}}
 
 el_memory: 5000M
