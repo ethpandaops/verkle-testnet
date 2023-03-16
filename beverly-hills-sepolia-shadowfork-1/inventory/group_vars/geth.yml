@@ -14,7 +14,7 @@ el_volumes:
   - "{{home_dir}}/jwtsecret:/jwtsecret"
 
 geth_init_args: >
-  --datadir=/eldata init /networkdata/genesis.json
+  --datadir=/eldata init /networkdata/genesis.json --cache.preimages
 
 el_start_args: >
   --datadir=/eldata

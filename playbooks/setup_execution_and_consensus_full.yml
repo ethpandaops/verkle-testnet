@@ -13,7 +13,7 @@
 
 # uploads validator keys corresponding to the host
 - import_playbook: tasks/upload_validator_keys.yml
-  when: no_validator_keys != 'true'
+  when: no_validator_keys|bool != true
 
 # uploads custom chain config and genesis data if needed
 - import_playbook: tasks/upload_custom_config_data.yml

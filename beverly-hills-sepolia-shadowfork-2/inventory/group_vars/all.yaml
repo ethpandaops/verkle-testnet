@@ -1,0 +1,165 @@
+##############################################
+# generic ansible config information
+##############################################
+ansible_user: "devops"
+bootstrap_user: "devops"
+initial_remote_user: "root"
+
+github_user_pubkeys:
+  - parithosh
+  - ralexstokes
+  - djrtwo
+  - skylenet
+  - jwasinger
+  - gballet
+  - shivamagl95
+  - barnabasbusa
+  - samcm
+
+ansible_python_interpreter: /usr/bin/python3
+oh_my_zsh_config:
+  PROMPT: "%{$fg[yellow]%}%n%{$fg[white]%}@%{$fg[red]%}%m%{$reset_color%} ${PROMPT}"
+
+##############################################
+#  common endpoints
+##############################################
+elendpoint: http://127.0.0.1:8545
+beacon_api_endpoint: "http://127.0.0.1:{{beacon_api_port}}"
+
+##############################################
+# testnet specific information
+##############################################
+testnet_type: custom
+eth2_network_name: beverly-hills-sepolia-shadowfork-2
+cl_network_name: beverly-hills-sepolia-shadowfork-2
+chainID: 11155111
+deploy_mode: shadowfork
+no_validator_keys: false
+checkpoint_sync_url: "http://206.189.1.63:4000"
+fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
+
+# enter bootnodes here if needed
+bootnode_enrs:
+  - "enr:-Iq4QJk4WqRkjsX5c2CXtOra6HnxN-BMXnWhmhEQO9Bn9iABTJGdjUOurM7Btj1ouKaFkvTRoju5vz2GPmVON2dffQKGAX53x8JigmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
+  - "enr:-Ly4QEQS_tUlOUiebmTz2r8K6uY5dn5h-1IVGymfgJh5U85kdMbZbQ8Rpf-kbiau4lDqDHCXNdovIalQv51n9kHcE_wBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCjdu-sMAAAR___________gmlkgnY0gmlwhJ_fDmaJc2VjcDI1NmsxoQKjqeJBEI30kzl2eVElKbqP6FOK7lDllGn5VPSiYpZNLIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+  - "enr:-KG4QCRjKiUSzcka_ixazFhsgP79LFPmjS3_cfocHdQLXmYiPbOHK4sNbEn_O47U9cCoKgbT8C9PWVbCa-9J7r-0-cADhGV0aDKQo3bvrDAAAEf__________4JpZIJ2NIJpcISf3w6NiXNlY3AyNTZrMaECskKPJ4HGQ-yiabjiHhGXJ6ynppKhCLIg_esSzuLQ8OuDdGNwgiMog3VkcIIjKA"
+
+el_bootnode_enode:
+  - "enode://4961b43a8fc60c194cfa29e6246244d6c8bf833671e01e7bf33a5e1da4636f7a0d66ccfc2dc471c294ab4ead465603740f0c94b2811c1d2daaf46cb6e0fdbc7a@159.223.14.141:30303"
+  - "enode://b76ff9d30e863bd3fff103497bfcf3037473ea0b5ba11c2159b864003cdd1ab80711484eb22e67e4104e5a87626d9b4dcca85b3cd9358da98b2df830938f9035@159.223.14.102:30303"
+
+##############################################
+# metric information
+##############################################
+# enter pushgateway config if needed
+prometheus_config_file: "prometheus/prometheus.yml.j2"
+push_url: "https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write"
+push_metrics_enabled: true
+remote_write_auth: true
+eth_metrics_exporter_enabled: true
+cl_validator_metrics_enabled: false
+eth_metrics_exporter_name: "metrics-exporter"
+eth_metrics_exporter_image: "samcm/ethereum-metrics-exporter:0.19.0"
+remote_write_username: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .username') }}"
+remote_write_password: "{{ lookup('pipe', 'keybase fs read /keybase/team/ethereum.devops/eth2/monitoring/observability-cluster/metrics-ingress-users/beverly-hills.json | jq .password') }}"
+
+ethstats_enabled: true
+ethstats_url: "ethstats.beverly-hills-shadowfork-2.ethpandaops.io"
+ethstats_password: "beverly-hills-shadowfork-2"
+
+##############################################
+# ports to configure
+##############################################
+el_rpc_port: 8545
+el_ws_rpc_port: 8546
+el_engine_port: 8551
+node_exporter_web_listen_address: "127.0.0.1:9100"
+prometheus_web_listen_address: "127.0.0.1:9101"
+el_engine_snoop_port: 8560
+beacon_api_port: 4000
+beacon_metrics_port: 8000
+beacon_p2p_port: 9000
+validator_metrics_port: 8001
+validator_rpc_port: 4002
+el_metrics_port: 8002
+eth_metrics_exporter_port: 8003
+
+##############################################
+# Command for JSON RPC snooper
+##############################################
+snoop_command: "./json_rpc_snoop -p {{el_engine_snoop_port}} http://127.0.0.1:4567"
+snoop_image_name: parithoshj/json_rpc_snoop:v1.0.0-x86
+snoop_container_name: snooper
+
+##############################################
+# name of the validator to display
+##############################################
+graffiti: "{{cl_client_name}}-{{el_client_name}}"
+
+##############################################
+# local data directories
+##############################################
+local_explorerdata_host_dir: "{{inventory_dir}}/../explorerdata"
+local_explorerdata_host_archive: "{{inventory_dir}}/../explorerdata.tar.gz"
+local_forkmondata_host_dir: "{{inventory_dir}}/../forkmondata"
+local_forkmondata_host_archive: "{{inventory_dir}}/../forkmondata.tar.gz"
+local_custom_config_data_host_dir: "{{inventory_dir}}/../custom_config_data"
+local_custom_config_data_host_archive: "{{inventory_dir}}/../custom_config_data.tar.gz"
+local_cl_config_filepath: "{{local_custom_config_data_host_dir}}/config.yaml"
+local_mnemonics_filepath: "{{local_custom_config_data_host_dir}}/mnemonics.yaml"
+# private dirs
+# Validator assignments
+local_validator_host_dir: "{{inventory_dir}}/../validator_prep/{{ansible_hostname}}"
+local_validator_host_archive: "{{inventory_dir}}/../validator_prep/{{ansible_hostname}}.tar.gz"
+
+
+##############################################
+# remote host data directories
+##############################################
+home_dir: "/home/{{ ansible_user }}"
+testnet_dir: "{{home_dir}}/custom_config_data"
+el_node_dir: "{{home_dir}}/eldata"
+beacon_node_dir: "{{home_dir}}/beacon"
+validator_node_dir: "{{home_dir}}/validator"
+
+##############################################
+# common log config
+##############################################
+common_log_options:
+  max-file: "10"
+  max-size: 30m
+  mode: non-blocking
+  max-buffer-size: 4m
+common_log_driver: json-file
+
+
+##############################################
+# container names
+##############################################
+beacon_container_name: beacon
+validator_container_name: validator
+execution_container_name: execution
+hi_peer_count: 25
+separate_validator_process_enabled: true
+
+##############################################
+# firewall rules
+##############################################
+firewall_allowed_tcp_ports:
+  - 22
+  - 30303
+  - 80
+  - 443
+  - 9000
+
+firewall_allowed_udp_ports:
+  - 30303
+  - 9000
+  - 80
+  - 443
+
+firewall_additional_rules:
+  - "iptables -A INPUT -p tcp --dport 8545 -s 165.22.207.186 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 4000 -s 165.22.207.186 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 8545 -s 206.189.1.63 -j ACCEPT"
+  - "iptables -A INPUT -p tcp --dport 4000 -s 206.189.1.63 -j ACCEPT"

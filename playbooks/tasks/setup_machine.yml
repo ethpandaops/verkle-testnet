@@ -88,7 +88,22 @@
       apt:
         name: jq
         state: present
-
+    - name: Install tmux
+      apt:
+        name: tmux
+        state: present
+    - name: Install build essential
+      apt:
+        name: build-essential
+        state: present
+    - name: Install ruby
+      apt:
+        name: ruby-bundler
+        state: present
+    - name: Install htop
+      apt:
+        name: htop
+        state: present
 - name: Unconditionally reboot the machine with all defaults
   hosts:
     - all

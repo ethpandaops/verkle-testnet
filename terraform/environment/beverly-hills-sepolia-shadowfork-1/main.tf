@@ -69,6 +69,8 @@ variable "digitalocean_vm_groups" {
         "6" = {}
         "7" = {}
         "8" = {}
+        "9" = {size = "m6-4vcpu-32gb"}
+        "10" = {size = "m6-4vcpu-32gb"}
         "bootnode" = {tags = "bootnode,tooling", size = "s-4vcpu-8gb-amd"}
       },
     },

@@ -95,6 +95,12 @@ variable "digitalocean_vm_groups" {
         "6" = {}
       },
     },
+    {
+      id = "lighthouse-nethermind"
+      vms = {
+        "1" = {}
+      },
+    },
   ]
 }
 

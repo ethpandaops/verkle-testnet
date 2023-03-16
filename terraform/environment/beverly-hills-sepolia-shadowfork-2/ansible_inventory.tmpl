@@ -1,0 +1,79 @@
+%{ for key, host in hosts ~}
+%{ if contains(host.tags, "bootnode") ~}
+${host.hostname} ansible_host=${host.ip} cloud=${host.cloud} cloud_region=${host.region} no_validator_keys=true
+%{ else ~}
+${host.hostname} ansible_host=${host.ip} cloud=${host.cloud} cloud_region=${host.region}
+%{ endif ~}
+%{ endfor ~}
+
+%{ for gid, group in groups ~}
+[${replace(gid, "-", "_")}]
+%{ for key, host in hosts ~}
+%{ if host.group == gid ~}
+${host.hostname}
+%{ endif ~}
+%{ endfor ~}
+
+%{ endfor ~}
+
+[bootnode]
+%{ for key, host in hosts ~}
+%{ if contains(host.tags, "bootnode") ~}
+${host.hostname} 
+%{ endif ~}
+%{ endfor ~}
+
+[tooling]
+%{ for key, host in hosts ~}
+%{ if contains(host.tags, "tooling") ~}
+${host.hostname} 
+%{ endif ~}
+%{ endfor ~}
+
+[lighthouse:children]
+lighthouse_geth
+
+[teku:children]
+teku_geth
+
+[lodestar:children]
+lodestar_geth
+
+[geth:children]
+lighthouse_geth
+teku_geth
+lodestar_geth
+
+[consensus:children]
+lighthouse
+teku
+lodestar
+
+[beacon:children]
+lighthouse
+teku
+lodestar
+
+[execution:children]
+geth
+
+[validator:children]
+beacon
+
+[txfuzz:children]
+tooling
+
+[forkmon:children]
+tooling
+
+[ethstats_server:children]
+tooling
+
+[faucet:children]
+tooling
+
+[landing_page:children]
+tooling
+
+[reverse_proxy:children]
+tooling
