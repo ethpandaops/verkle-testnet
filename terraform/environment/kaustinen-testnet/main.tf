@@ -87,6 +87,7 @@ variable "digitalocean_vm_groups" {
         "18" = {}
         "19" = {}
         "20" = {}
+        "21" = {}
       },
     },
     
