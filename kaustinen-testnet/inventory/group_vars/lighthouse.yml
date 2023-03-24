@@ -57,6 +57,7 @@ beacon_start_args: >
   --execution-endpoint={{execution_endpoint}}
   --suggested-fee-recipient={{fee_recipient}}
   --jwt-secrets="/jwtsecret"
+  --prune-payloads=false
 
 # in case of eth1 deposit endpoint problems: --dummy-eth1
 

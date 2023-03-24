@@ -38,11 +38,8 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 
 # enter bootnodes here if needed
 bootnode_enrs:
-  - "enr:-Ly4QJeoz6UeL2JL2h54iUU0IU2XFi8TnRFHZAIrzGCOuOS_ZG5d6w0w-hMJF00nzsT6i5Pu1v2qHMKDudQUZhvpzp0Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpAqejCCAAaUIv__________gmlkgnY0gmlwhLI-49qJc2VjcDI1NmsxoQMKd2_x7QQbLg4VT0hWjPO_xrH8C0U1lTCqCE0lsO9fzohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
-  - "enr:-Ly4QJOwAKdPlOWhIess30nOSjDeJk7tiyLPo1GUi9ORoGPkXZd9i6_U6yQ7WT0x8sWxtWNpErgXWf1bUuxpY36yzv8Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCHKuKCAAaUIv__________gmlkgnY0gmlwhLI-49qJc2VjcDI1NmsxoQP2d5aJli9xLcD0CojyIUp5-1H7G1NZ_7-ky7pRJoLJPYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
-  - "enode://e78c08a3dfafa0d04fad0d2e8f4f4e34d25696c25cecc5a33ab4acb80f7390aac11d0a25e1a71994ffdd59572d64c51c9f6295f8cfe06a78a5c4fb12e161d8c4@178.62.227.218:30303"
 
 ##############################################
 # metric information
