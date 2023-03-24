@@ -38,8 +38,10 @@ fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
 
 # enter bootnodes here if needed
 bootnode_enrs:
+  - "enr:-Ly4QMnR9dQmNg6pw1nSqHRJMlDPk_B-b2afDNYzvP0tpD6mX-b4GUfYyMHvt704F1R0yWiCZkt_gFN8tmqTkIyiElYBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCHKuKCAAaUIv__________gmlkgnY0gmlwhLI-49qJc2VjcDI1NmsxoQMLuDTBYsCu-QwePsUm5GhXbNIdJxT0WvxWkw2ILcm-2YhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
 
 el_bootnode_enode:
+  - "enode://472a49f5147a7d1f53d70366c8cdfbcfbd296ed28f50cd7665dc9f6644946b1029406f63dac1989f83808eee9510e4649f19cff4f8f74bf90b099bf6d9aa63e6@178.62.227.218:30303"
 
 ##############################################
 # metric information
