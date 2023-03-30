@@ -32,7 +32,7 @@ el_start_args: >
   --Merge.TerminalTotalDifficulty=0
   --JsonRpc.MaxBatchSize=1000
   --Pruning.Mode=None
-  --Sync.FastSync=true
+  --Sync.FastSync=false
   --datadir="/eldata"
   --Init.WebSocketsEnabled=true
   --JsonRpc.Enabled=true
